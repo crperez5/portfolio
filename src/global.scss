@@ -1,0 +1,134 @@
+@charset "utf-8";
+@import "/variables";
+@import "~bulma/bulma.sass";
+
+::selection {
+  background-color: $darkBlue;
+  color: $white;
+}
+
+header {
+  background-color: $orange;
+  &.section {
+    @include until($desktop) {
+      padding: 1rem 0.3rem;
+    }
+  }
+}
+
+main {
+  color: $darkBlue;
+  .button {
+    &:hover {
+      color: $orange;
+    }
+  }
+}
+
+.content {
+  h1 {
+    color: $orange;
+    @include mobile {
+      font-size: $size-2;
+    }
+    @include from($tablet) {
+      font-size: $size-1;
+    }
+  }
+  h2 {
+    @include mobile {
+      font-size: $size-4;
+    }
+    @include from($tablet) {
+      font-size: $size-2;
+    }
+  }
+  p {
+    @include mobile {
+      font-size: $size-5;
+    }
+    @include from($tablet) {
+      font-size: $size-4;
+    }
+  }
+}
+
+.navbar {
+  font-weight: $weight-bold;
+  .navbar-brand {
+    .navbar-item {
+      &:first-child {
+        padding: 0;
+      }
+    }
+  }
+
+  img {
+    max-height: inherit;
+  }
+}
+
+@each $radius in (6, 70) {
+  .has-radius-#{$radius} {
+    img {
+      border-radius: $radius + px;
+    }
+  }
+}
+
+.primary-background {
+  @include from($desktop) {
+    background-image: url(./images/icons-background.svg);
+  }
+}
+
+.has-no-background,
+.has-no-background:hover {
+  background: transparent !important;
+}
+
+.space {
+  background: linear-gradient(90deg, #f8faff 19px, transparent 1%) center,
+    linear-gradient(#f8faff 19px, transparent 1%) center, $darkBlue;
+  background-size: 22px 22px;
+  transform: skewY(6deg);
+}
+
+.value-box {
+  position: absolute;
+  z-index: 1;
+}
+
+.box-shadow-lift {
+  box-shadow: rgba(0, 0, 0, 0.1) 0 7px 25px 0;
+}
+.skew-oppose {
+  transform: skewY(-6deg);
+}
+
+.box {
+  transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+  &:hover {
+    box-shadow: rgba(50, 50, 93, 0.25) 0 30px 60px -12px;
+    transform: translateY(-5px);
+    transition: all 800ms cubic-bezier(0.19, 1, 0.22, 1);
+  }
+}
+
+.underline-secondary {
+  border-bottom: 5px solid $secondary;
+}
+
+.has-text-secondary {
+  color: $secondary;
+}
+
+.card {
+  &.is-fullheight {
+    height: 100%;
+  }
+}
+
+.footer {
+  margin-top: $size-1 * 4;
+}

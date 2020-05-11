@@ -1,0 +1,34 @@
+// Import a Google Font
+// @import url("https://fonts.googleapis.com/css?family=Nunito:400,700");
+
+// Brand colors
+$orange: #ec8b5e;
+$darkBlue: #141a46;
+$white: #ffffff;
+
+// Update Bulma's global variables
+$body-color: $white;
+$primary: $darkBlue;
+$secondary: $orange;
+$link: $orange;
+$link-hover: $white;
+$text: $darkBlue;
+$text-light: $darkBlue;
+$text-strong: $darkBlue;
+$background: $orange;
+$body-background-color: $white;
+$body-color: $darkBlue;
+$strong-color: $darkBlue;
+
+// Update Bulma's compoment variables
+$navbar-background-color: $orange;
+$navbar-item-color: $darkBlue;
+$navbar-item-hover-background-color: $orange;
+$navbar-item-hover-color: $white;
+$navbar-item-active-color: $white;
+$card-color: $darkBlue;
+$card-background-color: $white;
+$footer-background-color: $darkBlue;
+$footer-color: $white;
+$divider-background-color: $orange;
+$divider-color: $orange;
