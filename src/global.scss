@@ -132,3 +132,39 @@ main {
 .footer {
   margin-top: $size-1 * 4;
 }
+
+.is-fullhd-container {
+  @include fullhd {
+      max-width: $widescreen - $container-offset;
+  }
+}
+
+
+// TODO: Move to independent files
+.skills {
+  flex-wrap: wrap;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.skills-item {
+  height: 14em;
+  padding: 1.4em 3em;
+  width: 14em;
+}
+
+.title:not(:last-child) {
+  margin-bottom: 3rem;
+}
+
+.skills-description {
+  @include from($tablet) {
+    margin-top: -1.5rem;
+    padding-right: 3rem;
+    padding-top: 1.5rem;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+  }
+}

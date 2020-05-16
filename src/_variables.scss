@@ -32,3 +32,8 @@ $footer-background-color: $darkBlue;
 $footer-color: $white;
 $divider-background-color: $orange;
 $divider-color: $orange;
+
+:export {
+  primary: $primary;
+  secondary: $secondary;
+}
