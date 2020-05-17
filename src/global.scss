@@ -135,10 +135,9 @@ main {
 
 .is-fullhd-container {
   @include fullhd {
-      max-width: $widescreen - $container-offset;
+    max-width: $widescreen - $container-offset;
   }
 }
-
 
 // TODO: Move to independent files
 .skills {
@@ -164,5 +163,75 @@ main {
     padding-right: 3rem;
     padding-top: 1.5rem;
     top: 0;
+  }
+}
+
+.vertical-timeline-tabs {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding-left: 2rem;
+  max-width: 520px;
+  &:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 4px;
+    border-radius: 99em;
+    background-color: #f3f3f9;
+    content: "";
+  }
+  .vertical-tab + .vertical-tab {
+    margin-top: 2rem;
+  }
+  .vertical-tab {
+    &:hover {
+      opacity: 1;
+    }
+    &.is-active {
+      opacity: 1;
+      &:before {
+        opacity: 1;
+      }
+    }
+
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    opacity: 0.5;
+    transition-duration: 86ms;
+    will-change: opacity;
+    transition-duration: 86ms;
+    &:before {
+      position: absolute;
+      top: -2px;
+      left: -2rem;
+      bottom: -2px;
+      width: 4px;
+      border-radius: 99em;
+      background-color: $primary;
+      content: "";
+      opacity: 0;
+      transition-duration: 172ms;
+    }
+    .vertical-tab-year {
+      transform: rotate(-90deg);
+    }
+  }
+  .title {
+    margin-bottom: 1.5rem;
+    &:before {
+      @include from($desktop) {
+        position: absolute;
+        top: 37px;
+        left: -7rem;
+        content: "2018-20";
+        transform: rotate(-90deg);
+        width: 100px;
+        text-align: center;
+      }
+    }
   }
 }
