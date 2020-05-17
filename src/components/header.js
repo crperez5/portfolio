@@ -9,7 +9,7 @@ export default () => (
   <StaticQuery
     query={graphql`
       query {
-        mobileImage: file(relativePath: { eq: "cristianperezmatturro.png" }) {
+        mobileImage: file(relativePath: { eq: "me.png" }) {
           childImageSharp {
             fixed(
               duotone: { highlight: "#ec8b5e", shadow: "#141a46" }
@@ -20,7 +20,7 @@ export default () => (
             }
           }
         }
-        desktopImage: file(relativePath: { eq: "cristianperezmatturro.png" }) {
+        desktopImage: file(relativePath: { eq: "me.png" }) {
           childImageSharp {
             fixed(
               duotone: { highlight: "#ec8b5e", shadow: "#141a46" }
