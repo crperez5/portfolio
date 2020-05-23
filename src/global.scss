@@ -202,9 +202,9 @@ main {
     position: relative;
     display: flex;
     flex-direction: column;
-    opacity: 0.5;
+
     transition-duration: 86ms;
-    will-change: opacity;
+
     transition-duration: 86ms;
     min-height: 106px;
     &:before {
@@ -240,7 +240,7 @@ main {
 }
 
 .bd-snippet {
-  margin-top: 50px; 
+  margin-top: 50px;
   border: 2px solid $grey-lighter;
   position: relative;
   &:before {
