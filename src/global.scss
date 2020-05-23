@@ -53,6 +53,10 @@ main {
   }
 }
 
+.media {
+  margin-bottom: 1.5rem;
+}
+
 .navbar {
   font-weight: $weight-bold;
   .navbar-brand {
@@ -171,7 +175,6 @@ main {
   display: flex;
   flex-direction: column;
   padding-left: 2rem;
-  max-width: 520px;
   &:before {
     position: absolute;
     top: 0;
@@ -199,11 +202,11 @@ main {
     position: relative;
     display: flex;
     flex-direction: column;
-    cursor: pointer;
     opacity: 0.5;
     transition-duration: 86ms;
     will-change: opacity;
     transition-duration: 86ms;
+    min-height: 106px;
     &:before {
       position: absolute;
       top: -2px;
@@ -234,4 +237,35 @@ main {
       }
     }
   }
+}
+
+.bd-snippet {
+  margin-top: 50px; 
+  border: 2px solid $grey-lighter;
+  position: relative;
+  &:before {
+    color: $primary;
+    background: $secondary;
+    border-radius: $radius-small $radius-small 0 0;
+    bottom: 100%;
+    content: attr(title);
+    display: inline-block;
+    font-size: 12px;
+    font-weight: bold;
+    left: -1px;
+    letter-spacing: 1px;
+    margin-left: -1px;
+    padding: 3px 5px;
+    position: absolute;
+    text-transform: uppercase;
+    vertical-align: top;
+  }
+  &.bd-is-horizontal {
+    border-radius: $radius-large;
+    border-top-left-radius: 0;
+  }
+}
+
+.bd-snippet-preview {
+  padding: 1.5rem;
 }
