@@ -4,7 +4,7 @@ import SEO from "../components/seo"
 import Video from "../components/video"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEye } from "@fortawesome/free-solid-svg-icons"
-
+import styled from "styled-components"
 const input = [
   {
     title: "Video without description",
@@ -116,12 +116,12 @@ const splitConferences = (input, start) => {
 const cleanConferences = input =>
   input.reduce((prev, curr) => {
     if (curr !== undefined) return prev.concat([curr])
-    return prev;
+    return prev
   }, [])
 
 const ConferencesPage = () => {
-  const conferences = cleanConferences(splitConferences(input, 0))
-  
+  const conferenceGroups = cleanConferences(splitConferences(input, 0))
+
   return (
     <Layout>
       <SEO title="Cristian Pérez Matturro - Conferences" />
@@ -138,148 +138,35 @@ const ConferencesPage = () => {
             <div class="hr"></div>
           </div>
 
-          <div class="tile is-ancestor">
-            <div class="tile is-parent">
-              <article class="tile is-child box">
-                <p class="title">
-                  Video without description <br />
-                  <span class="subtitle is-small" title="Watched on">
-                    {" "}
-                    <FontAwesomeIcon
-                      icon={faEye}
-                      size="xs"
-                    ></FontAwesomeIcon>{" "}
-                    5/1/2020
-                  </span>
-                </p>
-
-                <Video url="https://www.youtube.com/embed/Z1gWfvPXDQo"></Video>
-              </article>
-            </div>
-            <div class="tile is-parent">
-              <article class="tile is-child box">
-                <p class="title">
-                  Video without description <br />
-                  <span class="subtitle is-small" title="Watched on">
-                    {" "}
-                    <FontAwesomeIcon
-                      icon={faEye}
-                      size="xs"
-                    ></FontAwesomeIcon>{" "}
-                    5/1/2020
-                  </span>
-                </p>
-
-                <Video url="https://www.youtube.com/embed/Z1gWfvPXDQo"></Video>
-              </article>
-            </div>
-            <div class="tile is-parent">
-              <article class="tile is-child box">
-                <p class="title">
-                  Video without description <br />
-                  <span class="subtitle is-small" title="Watched on">
-                    {" "}
-                    <FontAwesomeIcon
-                      icon={faEye}
-                      size="xs"
-                    ></FontAwesomeIcon>{" "}
-                    5/1/2020
-                  </span>
-                </p>
-
-                <Video url="https://www.youtube.com/embed/Z1gWfvPXDQo"></Video>
-              </article>
-            </div>
-          </div>
-
-          <div class="tile is-ancestor">
-            <div class="tile is-parent">
-              <article class="tile is-child box">
-                <p class="title">
-                  Video title goes here <br />
-                  <span class="subtitle is-small" title="Watched on">
-                    {" "}
-                    <FontAwesomeIcon
-                      icon={faEye}
-                      size="xs"
-                    ></FontAwesomeIcon>{" "}
-                    5/1/2020
-                  </span>
-                </p>
-                <p class="subtitle">
-                  This is a conference and this is what I want to say about it
-                  at the moment, but I may change
-                </p>
-                <Video url="https://www.youtube.com/embed/Z1gWfvPXDQo"></Video>
-              </article>
-            </div>
-            <div class="tile is-parent">
-              <article class="tile is-child box">
-                <p class="title">
-                  Another video title goes here
-                  <br />
-                  <span class="subtitle is-small" title="Watched on">
-                    {" "}
-                    <FontAwesomeIcon
-                      icon={faEye}
-                      size="xs"
-                    ></FontAwesomeIcon>{" "}
-                    5/1/2020
-                  </span>
-                </p>
-                <p class="subtitle">
-                  This is a conference and this is what I want to say about it
-                  at the moment, but I may change
-                </p>
-                <Video url="https://www.youtube.com/embed/Z1gWfvPXDQo"></Video>
-              </article>
-            </div>
-          </div>
-
-          <div class="tile is-ancestor">
-            <div class="tile is-parent is-8">
-              <article class="tile is-child box">
-                <p class="title">
-                  Another video title goes here
-                  <br />
-                  <span class="subtitle is-small" title="Watched on">
-                    {" "}
-                    <FontAwesomeIcon
-                      icon={faEye}
-                      size="xs"
-                    ></FontAwesomeIcon>{" "}
-                    5/1/2020
-                  </span>
-                </p>
-                <p class="subtitle">
-                  This is a conference and this is what I want to say about it
-                  at the moment, but I may change
-                </p>
-                <Video url="https://www.youtube.com/embed/Z1gWfvPXDQo"></Video>
-              </article>
-            </div>
-            <div class="tile is-parent">
-              <article class="tile is-child box">
-                <p class="title">
-                  Another video title goes here
-                  <br />
-                  <span class="subtitle is-small" title="Watched on">
-                    {" "}
-                    <FontAwesomeIcon
-                      icon={faEye}
-                      size="xs"
-                    ></FontAwesomeIcon>{" "}
-                    5/1/2020
-                  </span>
-                </p>
-                <p class="subtitle">
-                  This is a conference and this is what I want to say about it
-                  at the moment, but I may change
-                </p>
-                <Video url="https://www.youtube.com/embed/Z1gWfvPXDQo"></Video>
-              </article>
-            </div>
-          </div>
+          {conferenceGroups.map((conferenceGroup, groupIndex) => {
+            return (
+              <div class="tile is-ancestor">
+                {conferenceGroup.map((conference, conferenceIndex) => {
+                  return (
+                    <div
+                      class={
+                        "tile is-parent " +
+                        ((conferenceGroup.length === 2 &&
+                          groupIndex % 2 === 0 &&
+                          conferenceIndex % 2 === 0) ||
+                        (conferenceGroup.length === 2 &&
+                          groupIndex % 2 !== 0 &&
+                          conferenceIndex % 2 !== 0)
+                          ? "is-8"
+                          : "")
+                      }
+                    >
+                      <article class="tile is-child box">
+                        <WrappedConference
+                          conference={conference}
+                        ></WrappedConference>
+                      </article>
+                    </div>
+                  )
+                })}
+              </div>
+            )
+          })}
         </div>
       </div>
     </Layout>
@@ -287,3 +174,50 @@ const ConferencesPage = () => {
 }
 
 export default ConferencesPage
+
+const wrapConference = PassedConference => ({ children, ...props }) =>
+  !props.conference.description ? (
+    <StyledConferenceWrapper>
+      <PassedConference {...props}>{children}</PassedConference>
+    </StyledConferenceWrapper>
+  ) : (
+    <PassedConference {...props}>{children}</PassedConference>
+  )
+
+const Conference = props => (
+  <>
+    <p class="title">
+      {props.conference.title} <br />
+      <span class="subtitle is-small" title="Watched on">
+        {" "}
+        <FontAwesomeIcon icon={faEye} size="xs"></FontAwesomeIcon>{" "}
+        {props.conference.dateSeen}
+      </span>
+    </p>
+    <p class="subtitle">{props.conference.description}</p>
+    <Video
+      conference={props.conference}
+      url={props.conference.videoLink}
+    ></Video>
+  </>
+)
+const WrappedConference = wrapConference(Conference)
+
+const StyledConferenceWrapper = styled.div`
+  position: relative;
+  height: 100%;
+`
+const wrapVideo = Video => ({ children, ...props }) =>
+  !props.conference.description ? (
+    <StyledVideoWrapper>
+      <Video {...props}>{children}</Video>
+    </StyledVideoWrapper>
+  ) : (
+    <Video {...props}>{children}</Video>
+  )
+const WrappedVideo = wrapVideo(Video) // TODO
+
+const StyledVideoWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+`
