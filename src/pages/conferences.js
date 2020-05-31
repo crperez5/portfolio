@@ -5,6 +5,9 @@ import Video from "../components/video"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEye } from "@fortawesome/free-solid-svg-icons"
 import styled from "styled-components"
+import variables from "../_variables.scss"
+import theme from "../theme"
+
 const input = [
   {
     title: "Video without description",
@@ -139,26 +142,34 @@ const ConferencesPage = () => {
           </div>
 
           {conferenceGroups.map((conferenceGroup, groupIndex) => {
+            let isEvenGroup = conferenceGroup.reduce(
+              (prev, _, i) =>
+                prev && !getSizeClass(groupIndex, i, conferenceGroup.length),
+              true
+            )
+            let groupHasAnyDescriptions = conferenceGroup.reduce(
+              (prev, curr) => prev || curr.description,
+              false
+            )
+
             return (
               <div class="tile is-ancestor">
                 {conferenceGroup.map((conference, conferenceIndex) => {
+                  const sizeClass = getSizeClass(
+                    groupIndex,
+                    conferenceIndex,
+                    conferenceGroup.length
+                  )
                   return (
-                    <div
-                      class={
-                        "tile is-parent " +
-                        ((conferenceGroup.length === 2 &&
-                          groupIndex % 2 === 0 &&
-                          conferenceIndex % 2 === 0) ||
-                        (conferenceGroup.length === 2 &&
-                          groupIndex % 2 !== 0 &&
-                          conferenceIndex % 2 !== 0)
-                          ? "is-8"
-                          : "")
-                      }
-                    >
+                    <div class={"tile is-parent " + sizeClass}>
                       <article class="tile is-child box">
                         <WrappedConference
                           conference={conference}
+                          forcePushUp={
+                            isEvenGroup &&
+                            groupHasAnyDescriptions &&
+                            conference.description === ""
+                          }
                         ></WrappedConference>
                       </article>
                     </div>
@@ -169,15 +180,30 @@ const ConferencesPage = () => {
           })}
         </div>
       </div>
+      {/* <div class="section">
+        <div class="container">
+          <div class="columns">
+            <div class="column">
+              <button class="button is-loading"></button>
+            </div>
+          </div>
+        </div>
+      </div> */}
     </Layout>
   )
 }
 
 export default ConferencesPage
 
+const getSizeClass = (rowIndex, itemIndex, rowSize) =>
+  (rowSize === 2 && rowIndex % 2 === 0 && itemIndex % 2 === 0) ||
+  (rowSize === 2 && rowIndex % 2 !== 0 && itemIndex % 2 !== 0)
+    ? "is-8"
+    : ""
+
 const wrapConference = PassedConference => ({ children, ...props }) =>
-  !props.conference.description ? (
-    <StyledConferenceWrapper>
+  props.forcePushUp ? (
+    <StyledConferenceWrapper theme={theme}>
       <PassedConference {...props}>{children}</PassedConference>
     </StyledConferenceWrapper>
   ) : (
@@ -195,29 +221,41 @@ const Conference = props => (
       </span>
     </p>
     <p class="subtitle">{props.conference.description}</p>
-    <Video
+    <WrappedVideo
       conference={props.conference}
       url={props.conference.videoLink}
-    ></Video>
+      forcePushUp={props.forcePushUp}
+    ></WrappedVideo>
   </>
 )
 const WrappedConference = wrapConference(Conference)
 
 const StyledConferenceWrapper = styled.div`
+  ${({ theme }) =>
+    theme.mixins.from(
+      variables.tablet,
+      `
   position: relative;
-  height: 100%;
+  height: 100%;`
+    )}
 `
+
 const wrapVideo = Video => ({ children, ...props }) =>
-  !props.conference.description ? (
-    <StyledVideoWrapper>
+  props.forcePushUp ? (
+    <StyledVideoWrapper theme={theme}>
       <Video {...props}>{children}</Video>
     </StyledVideoWrapper>
   ) : (
     <Video {...props}>{children}</Video>
   )
-const WrappedVideo = wrapVideo(Video) // TODO
+const WrappedVideo = wrapVideo(Video)
 
 const StyledVideoWrapper = styled.div`
-  position: absolute;
-  bottom: 0;
+  ${({ theme }) =>
+    theme.mixins.from(
+      variables.tablet,
+      `
+position: absolute;
+    bottom: 0;`
+    )}
 `

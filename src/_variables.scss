@@ -33,7 +33,11 @@ $footer-color: $white;
 $divider-background-color: $orange;
 $divider-color: $orange;
 
+// Responsiveness
+$tablet: 769px !default;
+
 :export {
   primary: $primary;
   secondary: $secondary;
+  tablet: $tablet;
 }
