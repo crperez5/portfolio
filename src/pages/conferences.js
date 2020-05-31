@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Video from "../components/video"
@@ -124,7 +124,17 @@ const cleanConferences = input =>
 
 const ConferencesPage = () => {
   const conferenceGroups = cleanConferences(splitConferences(input, 0))
+  const [isLoading, setIsLoading] = useState(false)
 
+  // TODO: This component and LoadMoreButton should be able to share state. 
+  
+  useEffect(() => {
+    if (isLoading) {
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 3000)
+    }
+  }, [isLoading])
   return (
     <Layout>
       <SEO title="Cristian Pérez Matturro - Conferences" />
@@ -180,16 +190,29 @@ const ConferencesPage = () => {
           })}
         </div>
       </div>
-      {/* <div class="section">
-        <div class="container">
+      <div class="section">
+        <div class="container has-text-centered">
           <div class="columns">
             <div class="column">
-              <button class="button is-loading"></button>
+              <LoadMoreButton></LoadMoreButton>
             </div>
           </div>
         </div>
-      </div> */}
+      </div>
     </Layout>
+  )
+}
+
+const LoadMoreButton = props => {
+  const [isLoading, setIsLoading] = useState(false)
+
+  return (
+    <button
+      class={`button is-size-3-tablet ${isLoading ? "is-loading" : ""}`}
+      onClick={() => setIsLoading(true)}
+    >
+      Load More (22)
+    </button>
   )
 }
 
