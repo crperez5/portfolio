@@ -123,18 +123,27 @@ const cleanConferences = input =>
   }, [])
 
 const ConferencesPage = () => {
-  const conferenceGroups = cleanConferences(splitConferences(input, 0))
+  const [conferenceGroups, setConferenceGroups] = useState(
+    cleanConferences(splitConferences(input, 0))
+  )
   const [isLoading, setIsLoading] = useState(false)
 
-  // TODO: This component and LoadMoreButton should be able to share state. 
-  
+  const loadMore = () => {
+    setIsLoading(true)
+  }
+
   useEffect(() => {
     if (isLoading) {
       setTimeout(() => {
+        setConferenceGroups([
+          ...conferenceGroups,
+          ...cleanConferences(splitConferences(input, 0)),
+        ])
         setIsLoading(false)
       }, 3000)
     }
   }, [isLoading])
+
   return (
     <Layout>
       <SEO title="Cristian Pérez Matturro - Conferences" />
@@ -194,7 +203,10 @@ const ConferencesPage = () => {
         <div class="container has-text-centered">
           <div class="columns">
             <div class="column">
-              <LoadMoreButton></LoadMoreButton>
+              <LoadMoreButton
+                onClick={loadMore}
+                isLoading={isLoading}
+              ></LoadMoreButton>
             </div>
           </div>
         </div>
@@ -203,13 +215,11 @@ const ConferencesPage = () => {
   )
 }
 
-const LoadMoreButton = props => {
-  const [isLoading, setIsLoading] = useState(false)
-
+const LoadMoreButton = ({ onClick, isLoading }) => {
   return (
     <button
       class={`button is-size-3-tablet ${isLoading ? "is-loading" : ""}`}
-      onClick={() => setIsLoading(true)}
+      onClick={_ => onClick()}
     >
       Load More (22)
     </button>
