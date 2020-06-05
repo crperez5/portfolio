@@ -7,104 +7,18 @@ import { faEye } from "@fortawesome/free-solid-svg-icons"
 import styled from "styled-components"
 import variables from "../_variables.scss"
 import theme from "../theme"
+import { graphql } from "gatsby"
+import { ContentfulClient } from "react-contentful"
+import { spaceId as space, accessToken } from "../environment"
 
-const input = [
-  {
-    title: "Video without description",
-    description: "",
-    dateSeen: "5/1/2020",
-    videoLink: "https://www.youtube.com/embed/Z1gWfvPXDQo",
-  },
-  {
-    title: "Video with description",
-    description:
-      "This is a conference and this is what I want to say about it at the moment, but I may change",
-    dateSeen: "5/1/2020",
-    videoLink: "https://www.youtube.com/embed/Z1gWfvPXDQo",
-  },
-  {
-    title: "Video with description",
-    description:
-      "This is a conference and this is what I want to say about it at the moment, but I may change",
-    dateSeen: "5/1/2020",
-    videoLink: "https://www.youtube.com/embed/Z1gWfvPXDQo",
-  },
-  {
-    title: "Video with description",
-    description:
-      "This is a conference and this is what I want to say about it at the moment, but I may change",
-    dateSeen: "5/1/2020",
-    videoLink: "https://www.youtube.com/embed/Z1gWfvPXDQo",
-  },
-  {
-    title: "Video with description",
-    description:
-      "This is a conference and this is what I want to say about it at the moment, but I may change",
-    dateSeen: "5/1/2020",
-    videoLink: "https://www.youtube.com/embed/Z1gWfvPXDQo",
-  },
-  {
-    title: "Video with description",
-    description:
-      "This is a conference and this is what I want to say about it at the moment, but I may change",
-    dateSeen: "5/1/2020",
-    videoLink: "https://www.youtube.com/embed/Z1gWfvPXDQo",
-  },
-  {
-    title: "Video without description",
-    description: "",
-    dateSeen: "5/1/2020",
-    videoLink: "https://www.youtube.com/embed/Z1gWfvPXDQo",
-  },
-  {
-    title: "Video without description",
-    description: "",
-    dateSeen: "5/1/2020",
-    videoLink: "https://www.youtube.com/embed/Z1gWfvPXDQo",
-  },
-  {
-    title: "Video without description",
-    description: "",
-    dateSeen: "5/1/2020",
-    videoLink: "https://www.youtube.com/embed/Z1gWfvPXDQo",
-  },
-  {
-    title: "Video without description",
-    description: "",
-    dateSeen: "5/1/2020",
-    videoLink: "https://www.youtube.com/embed/Z1gWfvPXDQo",
-  },
-  {
-    title: "Video with description",
-    description:
-      "This is a conference and this is what I want to say about it at the moment, but I may change",
-    dateSeen: "5/1/2020",
-    videoLink: "https://www.youtube.com/embed/Z1gWfvPXDQo",
-  },
-  {
-    title: "Video with description",
-    description:
-      "This is a conference and this is what I want to say about it at the moment, but I may change",
-    dateSeen: "5/1/2020",
-    videoLink: "https://www.youtube.com/embed/Z1gWfvPXDQo",
-  },
-  {
-    title: "Video with description",
-    description:
-      "This is a conference and this is what I want to say about it at the moment, but I may change",
-    dateSeen: "5/1/2020",
-    videoLink: "https://www.youtube.com/embed/Z1gWfvPXDQo",
-  },
-  {
-    title: "Video with description",
-    description:
-      "This is a conference and this is what I want to say about it at the moment, but I may change",
-    dateSeen: "5/1/2020",
-    videoLink: "https://www.youtube.com/embed/Z1gWfvPXDQo",
-  },
-]
+const client = new ContentfulClient({
+  accessToken,
+  space,
+})
 
-const splitConferences = (input, start) => {
+const nodesPerPage = 1
+
+const splitNodes = (input, start) => {
   if (start >= input.length) {
     return
   }
@@ -113,20 +27,21 @@ const splitConferences = (input, start) => {
   const groupSize = ~~(Math.random() * 2) ? minLength : maxLength
   const group = input.slice(start, start + groupSize)
   const newStart = start + group.length
-  return [group].concat(splitConferences(input, newStart))
+  return [group].concat(splitNodes(input, newStart))
 }
 
-const cleanConferences = input =>
+const cleanNodes = input =>
   input.reduce((prev, curr) => {
     if (curr !== undefined) return prev.concat([curr])
     return prev
   }, [])
 
-const ConferencesPage = () => {
-  const [conferenceGroups, setConferenceGroups] = useState(
-    cleanConferences(splitConferences(input, 0))
-  )
+const ConferencesPage = ({ data }) => {
+  const totalCount = data.us.totalCount
+  const nodesList = cleanNodes(splitNodes(data.us.nodes, 0))
+  const [nodes, setNodes] = useState(nodesList)
   const [isLoading, setIsLoading] = useState(false)
+  const [page, setPage] = useState(0)
 
   const loadMore = () => {
     setIsLoading(true)
@@ -134,13 +49,28 @@ const ConferencesPage = () => {
 
   useEffect(() => {
     if (isLoading) {
-      setTimeout(() => {
-        setConferenceGroups([
-          ...conferenceGroups,
-          ...cleanConferences(splitConferences(input, 0)),
-        ])
-        setIsLoading(false)
-      }, 3000)
+      client
+        .getEntries({
+          content_type: "EventAttendance",
+          skip: (page + 1) * nodesPerPage,
+          limit: nodesPerPage,
+          order: "-fields.date",
+        })
+        .then(function (result) {
+          const newNodes = result.items.map(n => {
+            return {
+              ...n.fields,
+              description: n.fields.description
+                ? { description: n.fields.description }
+                : null,
+            }
+          })
+
+          const nodesList = cleanNodes(splitNodes(newNodes, 0))
+          setPage(page + 1)
+          setIsLoading(false)
+          setNodes([...nodes, ...nodesList])
+        })
     }
   }, [isLoading])
 
@@ -160,34 +90,34 @@ const ConferencesPage = () => {
             <div class="hr"></div>
           </div>
 
-          {conferenceGroups.map((conferenceGroup, groupIndex) => {
-            let isEvenGroup = conferenceGroup.reduce(
+          {nodes.map((nodeGroup, groupIndex) => {
+            let isEvenGroup = nodeGroup.reduce(
               (prev, _, i) =>
-                prev && !getSizeClass(groupIndex, i, conferenceGroup.length),
+                prev && !getSizeClass(groupIndex, i, nodeGroup.length),
               true
             )
-            let groupHasAnyDescriptions = conferenceGroup.reduce(
-              (prev, curr) => prev || curr.description,
+            let groupHasAnyDescriptions = nodeGroup.reduce(
+              (prev, curr) => prev || curr.description !== null,
               false
             )
 
             return (
               <div class="tile is-ancestor">
-                {conferenceGroup.map((conference, conferenceIndex) => {
+                {nodeGroup.map((node, nodeIndex) => {
                   const sizeClass = getSizeClass(
+                    nodeIndex,
                     groupIndex,
-                    conferenceIndex,
-                    conferenceGroup.length
+                    nodeGroup.length
                   )
                   return (
                     <div class={"tile is-parent " + sizeClass}>
                       <article class="tile is-child box">
                         <WrappedConference
-                          conference={conference}
+                          conference={node}
                           forcePushUp={
                             isEvenGroup &&
                             groupHasAnyDescriptions &&
-                            conference.description === ""
+                            !node.description
                           }
                         ></WrappedConference>
                       </article>
@@ -206,6 +136,9 @@ const ConferencesPage = () => {
               <LoadMoreButton
                 onClick={loadMore}
                 isLoading={isLoading}
+                totalCount={totalCount}
+                currentPage={page}
+                nodesPerPage={nodesPerPage}
               ></LoadMoreButton>
             </div>
           </div>
@@ -215,14 +148,23 @@ const ConferencesPage = () => {
   )
 }
 
-const LoadMoreButton = ({ onClick, isLoading }) => {
+const LoadMoreButton = ({
+  onClick,
+  isLoading,
+  totalCount,
+  currentPage,
+  nodesPerPage,
+}) => {
+  const remaininigCount = totalCount - (currentPage + 1) * nodesPerPage
   return (
-    <button
-      class={`button is-size-3-tablet ${isLoading ? "is-loading" : ""}`}
-      onClick={_ => onClick()}
-    >
-      Load More (22)
-    </button>
+    remaininigCount > 0 && (
+      <button
+        class={`button is-size-3-tablet ${isLoading ? "is-loading" : ""}`}
+        onClick={_ => onClick()}
+      >
+        Load More ({remaininigCount})
+      </button>
+    )
   )
 }
 
@@ -250,10 +192,10 @@ const Conference = props => (
       <span class="subtitle is-small" title="Watched on">
         {" "}
         <FontAwesomeIcon icon={faEye} size="xs"></FontAwesomeIcon>{" "}
-        {props.conference.dateSeen}
+        {new Date(props.conference.date).toLocaleDateString()}
       </span>
     </p>
-    <p class="subtitle">{props.conference.description}</p>
+    <p class="subtitle">{props.conference.description?.description}</p>
     <WrappedVideo
       conference={props.conference}
       url={props.conference.videoLink}
@@ -291,4 +233,38 @@ const StyledVideoWrapper = styled.div`
 position: absolute;
     bottom: 0;`
     )}
+`
+export const query = graphql`
+  {
+    us: allContentfulEventAttendance(
+      sort: { fields: [date], order: DESC }
+      limit: 1
+      filter: { node_locale: { eq: "en-US" } }
+    ) {
+      totalCount
+      nodes {
+        title
+        date
+        description {
+          description
+        }
+        videoLink
+      }
+    }
+    es: allContentfulEventAttendance(
+      sort: { fields: [date], order: DESC }
+      limit: 1
+      filter: { node_locale: { eq: "es-ES" } }
+    ) {
+      totalCount
+      nodes {
+        title
+        date
+        description {
+          description
+        }
+        videoLink
+      }
+    }
+  }
 `
