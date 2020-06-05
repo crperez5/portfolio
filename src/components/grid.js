@@ -1,14 +1,22 @@
 import React from "react"
 import GridItem from "./gridItem"
+import { usePrevious } from "../shared/hooks"
 
 const Grid = ({ data }) => {
-  const items = cleanData(splitData(data, 0))
+  const [previousLength] = usePrevious(data.length)
+  const [previousItems, setPreviousItems] = usePrevious()
+
+  const newData = data.slice(previousLength ?? 0)
+  const items = cleanData(splitData(newData, 0))
+
+  const itemGroups = [...(previousItems ?? []), ...items]
+  setPreviousItems(itemGroups)
 
   return (
     <>
-      {items.map((itemGroup, groupIndex) => {
+      {itemGroups.map((itemGroup, groupIndex) => {
         const isEvenGroup = isEvenItemGroup(itemGroup, groupIndex)
-        const groupHasDescriptions = groupHasDescriptions(itemGroup)
+        const hasDescriptions = groupHasDescriptions(itemGroup)
 
         return (
           <div class="tile is-ancestor">
@@ -24,7 +32,7 @@ const Grid = ({ data }) => {
                     <GridItem
                       item={item}
                       forcePushUp={
-                        isEvenGroup && groupHasDescriptions && !item.description
+                        isEvenGroup && hasDescriptions && !item.description
                       }
                     ></GridItem>
                   </article>
@@ -38,7 +46,10 @@ const Grid = ({ data }) => {
   )
 }
 
-export default Grid
+export default React.memo(
+  Grid,
+  (prevProps, nextProps) => prevProps.data === nextProps.data
+)
 
 const splitData = (data, start) => {
   if (start >= data.length) {
@@ -58,18 +69,16 @@ const cleanData = input =>
     return prev
   }, [])
 
+const getSizeClass = (rowIndex, itemIndex, rowSize) =>
+  (rowSize === 2 && rowIndex % 2 === 0 && itemIndex % 2 === 0) ||
+  (rowSize === 2 && rowIndex % 2 !== 0 && itemIndex % 2 !== 0)
+    ? "is-8"
+    : ""
 const isEvenItemGroup = (group, groupIndex) =>
   group.reduce(
     (prev, _, itemIndex) =>
       prev && !getSizeClass(groupIndex, itemIndex, group.length),
     true
   )
-
 const groupHasDescriptions = group =>
-  group.reduce((prev, curr) => prev || curr.description !== null, false)
-
-const getSizeClass = (rowIndex, itemIndex, rowSize) =>
-  (rowSize === 2 && rowIndex % 2 === 0 && itemIndex % 2 === 0) ||
-  (rowSize === 2 && rowIndex % 2 !== 0 && itemIndex % 2 !== 0)
-    ? "is-8"
-    : ""
+  group.reduce((prev, curr) => prev || curr.description, false)

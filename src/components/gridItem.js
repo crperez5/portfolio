@@ -2,35 +2,37 @@ import React from "react"
 import styled from "styled-components"
 import variables from "../_variables.scss"
 import theme from "../theme"
+import Video from "../components/video"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faEye } from "@fortawesome/free-solid-svg-icons"
 
 const GridItem = ({ item, forcePushUp }) => {
+  const mappedItem = {
+    ...item,
+    description:
+      typeof item.description !== "object"
+        ? item.description
+        : item.description.description,
+  }
   return (
-    <WrappedGridItem item={item} forcePushUp={forcePushUp}></WrappedGridItem>
+    <WrappedGridItem
+      {...mappedItem}
+      forcePushUp={forcePushUp}
+    ></WrappedGridItem>
   )
 }
 
 export default GridItem
 
-const WrappedGridItem = wrapGridItem(Item)
-
-const wrapGridItem = Item => ({ children, ...props }) =>
-  props.forcePushUp ? (
+const wrapGridItem = Item => ({ ...props }) => {
+  return props.forcePushUp ? (
     <StyledGridItemWrapper theme={theme}>
-      <Item {...props}>{children}</Item>
+      <Item {...props}></Item>
     </StyledGridItemWrapper>
   ) : (
-    <Item {...props}>{children}</Item>
+    <Item {...props}></Item>
   )
-
-const StyledGridItemWrapper = styled.div`
-  ${({ theme }) =>
-    theme.mixins.from(
-      variables.tablet,
-      `
-  position: relative;
-  height: 100%;`
-    )}
-`
+}
 
 const Item = ({ title, date, description, videoLink, forcePushUp }) => (
   <>
@@ -48,6 +50,18 @@ const Item = ({ title, date, description, videoLink, forcePushUp }) => (
     )}
   </>
 )
+
+const WrappedGridItem = wrapGridItem(Item)
+
+const StyledGridItemWrapper = styled.div`
+  ${({ theme }) =>
+    theme.mixins.from(
+      variables.tablet,
+      `
+  position: relative;
+  height: 100%;`
+    )}
+`
 
 const wrapVideo = Video => ({ children, ...props }) =>
   props.forcePushUp ? (
