@@ -93,12 +93,17 @@ export default () => (
                 className={"navbar-menu " + (burgerActive ? "is-active" : "")}
               >
                 <div class="navbar-start is-uppercase">
-                  <Link className="has-no-background navbar-item" to="/">
+                  <Link
+                    className="has-no-background navbar-item"
+                    activeClassName="is-active"
+                    to="/"
+                  >
                     <span class="navbar-item-name">About me</span>
                   </Link>
 
                   <Link
                     className="has-no-background navbar-item"
+                    activeClassName="is-active"
                     to="/tech-stack/"
                   >
                     <span class="navbar-item-name">Tech Stack</span>
@@ -106,6 +111,7 @@ export default () => (
 
                   <Link
                     className="has-no-background navbar-item"
+                    activeClassName="is-active"
                     to="/projects/"
                   >
                     <span class="navbar-item-name">Projects</span>
@@ -113,12 +119,14 @@ export default () => (
 
                   <Link
                     className="has-no-background navbar-item"
+                    activeClassName="is-active"
                     to="/conferences/"
                   >
                     <span class="navbar-item-name">Conferences</span>
                   </Link>
                   <Link
                     className="has-no-background navbar-item"
+                    activeClassName="is-active"
                     to="/contact/"
                   >
                     <span class="navbar-item-name">Contact</span>
