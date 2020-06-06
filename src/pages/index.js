@@ -5,6 +5,8 @@ import Values from "../components/values"
 import WhatIDo from "../components/whatido"
 import SEO from "../components/seo"
 import Img from "gatsby-image"
+import { useTranslation } from "react-i18next"
+import TranslatedPage from "../hoc/TranslatedPage"
 
 export const query = graphql`
   query {
@@ -21,8 +23,9 @@ export const query = graphql`
     }
   }
 `
-
 const IndexPage = ({ data }) => {
+  const { t } = useTranslation()
+
   return (
     <Layout>
       <SEO title="Cristian Pérez Matturro - Senior Full Stack Software Engineer" />
@@ -31,7 +34,7 @@ const IndexPage = ({ data }) => {
           <div class="columns is-vcentered">
             <div class="column">
               <div class="content">
-                <h1 class="title">Hi, I'm Cristian.</h1>
+                <h1 class="title">{t("index.title")}</h1>
                 <h2 class="subtitle is-spaced">
                   <strong> Senior Full-Stack Software Engineer</strong>
                 </h2>
@@ -66,4 +69,4 @@ const IndexPage = ({ data }) => {
   )
 }
 
-export default IndexPage
+export default TranslatedPage(IndexPage)

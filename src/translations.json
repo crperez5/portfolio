@@ -1,0 +1,16 @@
+{
+  "en": {
+    "translation": {
+      "index": {
+        "title": "Hi, I'm Cristian."
+      }
+    }
+  },
+  "es": {
+    "translation": {
+      "index": {
+        "title": "Hola, Soy Cristian."
+      }
+    }
+  }
+}
