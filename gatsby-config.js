@@ -1,11 +1,13 @@
 const path = require(`path`)
-const { spaceId, accessToken } = require('./src/environment');
+const { spaceId, accessToken } = require("./src/environment")
 
 module.exports = {
   siteMetadata: {
     title: `Cristian Perez Matturro - Senior Full Stack Software Engineer`,
     description: `Portfolio website`,
     author: `crperez.informatica@gmail.com`,
+    supportedLanguages: ["en", "es"],
+    defaultLanguage: "en",
   },
   plugins: [
     `gatsby-plugin-sass`,
@@ -46,5 +48,6 @@ module.exports = {
         accessToken,
       },
     },
+    `gatsby-plugin-netlify`,
   ],
 }

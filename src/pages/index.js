@@ -6,7 +6,6 @@ import WhatIDo from "../components/whatido"
 import SEO from "../components/seo"
 import Img from "gatsby-image"
 import { useTranslation } from "react-i18next"
-import TranslatedPage from "../hoc/TranslatedPage"
 
 export const query = graphql`
   query {
@@ -69,4 +68,4 @@ const IndexPage = ({ data }) => {
   )
 }
 
-export default TranslatedPage(IndexPage)
+export default IndexPage
