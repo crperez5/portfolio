@@ -4,7 +4,7 @@ import Img from "gatsby-image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons"
 import { Link } from "gatsby"
-
+import { usePageContext } from "../Context.jsx"
 export default () => (
   <StaticQuery
     query={graphql`
@@ -44,7 +44,8 @@ export default () => (
           media: `(min-width: 1024px)`,
         },
       ]
-
+      const { lang } = usePageContext()
+    
       return (
         <header class="section primary-background">
           <div class="container">
@@ -96,7 +97,7 @@ export default () => (
                   <Link
                     className="has-no-background navbar-item"
                     activeClassName="is-active"
-                    to="/"
+                    to={`/${lang}/`}
                   >
                     <span class="navbar-item-name">About me</span>
                   </Link>
@@ -104,7 +105,7 @@ export default () => (
                   <Link
                     className="has-no-background navbar-item"
                     activeClassName="is-active"
-                    to="/tech-stack/"
+                    to={`/${lang}/tech-stack/`}
                   >
                     <span class="navbar-item-name">Tech Stack</span>
                   </Link>
@@ -112,7 +113,7 @@ export default () => (
                   <Link
                     className="has-no-background navbar-item"
                     activeClassName="is-active"
-                    to="/projects/"
+                    to={`/${lang}/projects/`}
                   >
                     <span class="navbar-item-name">Projects</span>
                   </Link>
@@ -120,14 +121,14 @@ export default () => (
                   <Link
                     className="has-no-background navbar-item"
                     activeClassName="is-active"
-                    to="/conferences/"
+                    to={`/${lang}/conferences/`}
                   >
                     <span class="navbar-item-name">Conferences</span>
                   </Link>
                   <Link
                     className="has-no-background navbar-item"
                     activeClassName="is-active"
-                    to="/contact/"
+                    to={`/${lang}/contact/`}
                   >
                     <span class="navbar-item-name">Contact</span>
                   </Link>

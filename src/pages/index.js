@@ -6,7 +6,6 @@ import WhatIDo from "../components/whatido"
 import SEO from "../components/seo"
 import Img from "gatsby-image"
 import { useTranslation } from "react-i18next"
-
 export const query = graphql`
   query {
     image: file(relativePath: { eq: "idea.png" }) {
