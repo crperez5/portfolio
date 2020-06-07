@@ -1,16 +1,13 @@
-/**
- * SEO component that queries for data with
- *  Gatsby's useStaticQuery React hook
- *
- * See: https://www.gatsbyjs.org/docs/use-static-query/
- */
-
 import React from "react"
-import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
+import { useTranslation } from "react-i18next"
+import { usePageContext } from "../PageContext"
 
-function SEO({ description, lang, meta, title }) {
+function SEO({ title, description }) {
+  const { t } = useTranslation()
+  const { lang, originalPath } = usePageContext()
+
   const { site } = useStaticQuery(
     graphql`
       query {
@@ -19,22 +16,25 @@ function SEO({ description, lang, meta, title }) {
             title
             description
             author
+            siteUrl
+            supportedLanguages
           }
         }
       }
     `
   )
 
-  const metaDescription = description || site.siteMetadata.description
+  const metaDescription = description || t("siteMetadata.description")
+  const host = site.siteMetadata.siteUrl
 
   return (
     <Helmet
-
       htmlAttributes={{
         lang,
       }}
+      defaultTitle={t("siteMetadata.title")}
       title={title}
-      titleTemplate={`%s | ${site.siteMetadata.title}`}
+      titleTemplate={`%s | ${t("siteMetadata.title")}`}
       meta={[
         {
           name: `description`,
@@ -53,37 +53,28 @@ function SEO({ description, lang, meta, title }) {
           content: `website`,
         },
         {
-          name: `twitter:card`,
-          content: `summary`,
+          property: `og:locale`,
+          content: lang,
+        },
+      ]}
+      link={[
+        {
+          rel: "canonical",
+          href: `${host}/${lang}${originalPath}`,
         },
         {
-          name: `twitter:creator`,
-          content: site.siteMetadata.author,
+          rel: "alternate",
+          hrefLang: "x-default",
+          href: `${host}${originalPath}`,
         },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-      ].concat(meta)}
+        ...site.siteMetadata.supportedLanguages.map(supportedLang => ({
+          rel: "alternate",
+          hrefLang: supportedLang,
+          href: `${host}/${supportedLang}${originalPath}`,
+        })),
+      ]}
     />
   )
-}
-
-SEO.defaultProps = {
-  lang: `en`,
-  meta: [],
-  description: ``,
-}
-
-SEO.propTypes = {
-  description: PropTypes.string,
-  lang: PropTypes.string,
-  meta: PropTypes.arrayOf(PropTypes.object),
-  title: PropTypes.string.isRequired,
 }
 
 export default SEO

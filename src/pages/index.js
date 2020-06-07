@@ -6,6 +6,7 @@ import WhatIDo from "../components/whatido"
 import SEO from "../components/seo"
 import Img from "gatsby-image"
 import { useTranslation } from "react-i18next"
+
 export const query = graphql`
   query {
     image: file(relativePath: { eq: "idea.png" }) {
@@ -26,13 +27,13 @@ const IndexPage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title="Cristian Pérez Matturro - Senior Full Stack Software Engineer" />
+      <SEO title={t("index.title")} />
       <section class="section">
         <div class="container">
           <div class="columns is-vcentered">
             <div class="column">
               <div class="content">
-                <h1 class="title">{t("index.title")}</h1>
+                <h1 class="title">{t("index.opener")}</h1>
                 <h2 class="subtitle is-spaced">
                   <strong> Senior Full-Stack Software Engineer</strong>
                 </h2>

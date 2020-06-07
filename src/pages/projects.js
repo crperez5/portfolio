@@ -4,6 +4,7 @@ import SEO from "../components/seo"
 import { graphql } from "gatsby"
 import Lightbox from "../components/lightbox"
 import Img from "gatsby-image"
+import { useTranslation } from "react-i18next"
 export const query = graphql`
   query {
     image: file(relativePath: { eq: "project.jpg" }) {
@@ -17,9 +18,11 @@ export const query = graphql`
 `
 
 const ProjectsPage = ({ data }) => {
+  const { t } = useTranslation()
+  
   return (
     <Layout>
-      <SEO title="Cristian Pérez Matturro - Projects" />
+     <SEO title={t("projects.title")} />
       <section class="section">
         <div class="container">
           <div class="columns is-centered">

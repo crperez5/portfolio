@@ -3,6 +3,7 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import variables from "../_variables.scss"
 import Icon from "../components/icon"
+import { useTranslation } from "react-i18next"
 
 const iconStyle = {
   fill: variables.primary,
@@ -10,10 +11,10 @@ const iconStyle = {
   height: "128px",
 }
 const TechStackPage = () => {
+  const { t } = useTranslation()
   return (
     <Layout>
-      <SEO title="Cristian Pérez Matturro - Tech Stack" />
-
+      <SEO title={t("tech-stack.title")} />
       <section class="section">
         <div class="container is-fullhd-container">
           <div class="columns">

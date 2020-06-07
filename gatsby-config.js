@@ -3,8 +3,9 @@ const { spaceId, accessToken } = require("./src/environment")
 
 module.exports = {
   siteMetadata: {
-    title: `Cristian Perez Matturro - Senior Full Stack Software Engineer`,
-    description: `Portfolio website`,
+    siteUrl: "https://crperez.dev",
+    title: `CPM | Senior Full Stack Software Engineer`,
+    description: `CPM | Backend and Frontend Developer | Implementing solutions since 2011 | On-site and remote work`,
     author: `crperez.informatica@gmail.com`,
     supportedLanguages: ["en", "es"],
     defaultLanguage: "en",

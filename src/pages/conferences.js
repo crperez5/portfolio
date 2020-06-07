@@ -5,14 +5,19 @@ import { graphql } from "gatsby"
 import { ContentfulClient } from "react-contentful"
 import { spaceId as space, accessToken } from "../environment"
 import Grid from "../components/grid"
+import { useTranslation } from "react-i18next"
+
 const client = new ContentfulClient({
   accessToken,
   space,
 })
 
+
 const nodesPerPage = 1
 
 const ConferencesPage = ({ data }) => {
+  const { t } = useTranslation()
+
   const totalCount = data.us.totalCount
   const [nodes, setNodes] = useState(data.us.nodes)
   const [isLoading, setIsLoading] = useState(false)
@@ -47,7 +52,7 @@ const ConferencesPage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title="Cristian Pérez Matturro - Conferences" />
+      <SEO title={t("conferences.title")} />
       <div class="section">
         <div class="container">
           <div>

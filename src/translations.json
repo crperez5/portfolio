@@ -1,15 +1,57 @@
 {
   "en": {
     "translation": {
+      "siteMetadata": {
+        "title": "CPM | Senior Full Stack Software Engineer",
+        "description": "CPM | Backend and Frontend Developer | Implementing solutions since 2011 | On-site and remote work"
+      },
+      "notfound": {
+        "title": "Not Found",
+        "message": "You just hit a route that doesn't exist... the sadness."
+      },
       "index": {
-        "title": "Hi, I'm Cristian."
+        "title": "About me",
+        "opener": "Hi, I'm Cristian."
+      },
+      "tech-stack": {
+        "title": "Technology Stack"
+      },
+      "projects": {
+        "title": "Projects"
+      },
+      "conferences": {
+        "title": "Conferences, Talks and Events"
+      },
+      "contact": {
+        "title": "Contact"
       }
     }
   },
   "es": {
     "translation": {
+      "siteMetadata": {
+        "title": "CPM | Ingeniero senior de Software Full Stack",
+        "description": "CPM | Desarrolador Backend y Frontend | Implementando soluciones desde 2011 | Trabajo presencial o en remoto"
+      },
+      "notfound": {
+        "title": "Página no encontrada",
+        "message": "La página que ha solicitado no existe... lo siento."
+      },
       "index": {
-        "title": "Hola, Soy Cristian."
+        "title": "Sobre mí",
+        "opener": "Hola, Soy Cristian."
+      },
+      "tech-stack": {
+        "title": "Tecnologías"
+      },
+      "projects": {
+        "title": "Proyectos"
+      },
+      "conferences": {
+        "title": "Conferencias, Charlas y Eventos"
+      },
+      "contact": {
+        "title": "Contacto"
       }
     }
   }

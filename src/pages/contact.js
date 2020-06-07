@@ -3,11 +3,14 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import styled from "styled-components"
 import variables from "../_variables.scss"
+import { useTranslation } from "react-i18next"
 
 const ContactPage = () => {
+  const { t } = useTranslation()
+  
   return (
     <Layout>
-      <SEO title="Cristian Pérez Matturro - Contact" />
+       <SEO title={t("contact.title")} />
       <section class="section is-medium">
         <div class="container">
           <div class="columns">

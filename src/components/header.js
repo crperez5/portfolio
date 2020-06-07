@@ -1,10 +1,10 @@
 import React, { useState } from "react"
+import Link from "./link"
 import { StaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons"
-import { Link } from "gatsby"
-import { usePageContext } from "../Context.jsx"
+// import { Link } from "gatsby"
 export default () => (
   <StaticQuery
     query={graphql`
@@ -44,8 +44,7 @@ export default () => (
           media: `(min-width: 1024px)`,
         },
       ]
-      const { lang } = usePageContext()
-    
+      
       return (
         <header class="section primary-background">
           <div class="container">
@@ -97,7 +96,7 @@ export default () => (
                   <Link
                     className="has-no-background navbar-item"
                     activeClassName="is-active"
-                    to={`/${lang}/`}
+                    to="/"
                   >
                     <span class="navbar-item-name">About me</span>
                   </Link>
@@ -105,7 +104,7 @@ export default () => (
                   <Link
                     className="has-no-background navbar-item"
                     activeClassName="is-active"
-                    to={`/${lang}/tech-stack/`}
+                    to="/tech-stack/"
                   >
                     <span class="navbar-item-name">Tech Stack</span>
                   </Link>
@@ -113,7 +112,7 @@ export default () => (
                   <Link
                     className="has-no-background navbar-item"
                     activeClassName="is-active"
-                    to={`/${lang}/projects/`}
+                    to="/projects/"
                   >
                     <span class="navbar-item-name">Projects</span>
                   </Link>
@@ -121,14 +120,14 @@ export default () => (
                   <Link
                     className="has-no-background navbar-item"
                     activeClassName="is-active"
-                    to={`/${lang}/conferences/`}
+                    to="/conferences/"
                   >
                     <span class="navbar-item-name">Conferences</span>
                   </Link>
                   <Link
                     className="has-no-background navbar-item"
                     activeClassName="is-active"
-                    to={`/${lang}/contact/`}
+                    to="/contact/"
                   >
                     <span class="navbar-item-name">Contact</span>
                   </Link>
