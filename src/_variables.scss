@@ -34,10 +34,18 @@ $divider-background-color: $orange;
 $divider-color: $orange;
 
 // Responsiveness
+$mobile: 768px !default;
 $tablet: 769px !default;
+$desktop: 1024px !default;
+$widescreen: 1216px !default;
+$fullhd: 1408px !default;
 
 :export {
   primary: $primary;
   secondary: $secondary;
+  mobile: $mobile;
   tablet: $tablet;
+  desktop: $desktop;
+  widescreen: $widescreen;
+  fullhd: $fullhd;
 }
