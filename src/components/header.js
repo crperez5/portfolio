@@ -9,24 +9,16 @@ export default () => (
   <StaticQuery
     query={graphql`
       query {
-        mobileImage: file(relativePath: { eq: "me.png" }) {
+        mobileImage: file(relativePath: { eq: "logo.png" }) {
           childImageSharp {
-            fixed(
-              duotone: { highlight: "#ec8b5e", shadow: "#141a46" }
-              width: 48
-              height: 48
-            ) {
+            fixed(width: 48, height: 48) {
               ...GatsbyImageSharpFixed
             }
           }
         }
-        desktopImage: file(relativePath: { eq: "me.png" }) {
+        desktopImage: file(relativePath: { eq: "logo.png" }) {
           childImageSharp {
-            fixed(
-              duotone: { highlight: "#ec8b5e", shadow: "#141a46" }
-              width: 128
-              height: 128
-            ) {
+            fixed(width: 128, height: 128) {
               ...GatsbyImageSharpFixed
             }
           }
@@ -44,7 +36,7 @@ export default () => (
           media: `(min-width: 1024px)`,
         },
       ]
-      
+
       return (
         <header class="section primary-background">
           <div class="container">
@@ -59,7 +51,7 @@ export default () => (
                   href="https://cristianperezmatturro.com/"
                 >
                   <Img
-                    className="has-radius-70"
+                    className="has-radius-275"
                     fixed={sources}
                     alt="Cristian Perez Matturro"
                   />
@@ -93,10 +85,18 @@ export default () => (
                 className={"navbar-menu " + (burgerActive ? "is-active" : "")}
               >
                 <div class="navbar-start is-uppercase">
-                  <Link
+                <Link
                     className="has-no-background navbar-item"
                     activeClassName="is-active"
                     to="/"
+                  >
+                    <span class="navbar-item-name">Home</span>
+                  </Link>
+
+                  <Link
+                    className="has-no-background navbar-item"
+                    activeClassName="is-active"
+                    to="/about"
                   >
                     <span class="navbar-item-name">About me</span>
                   </Link>

@@ -1,22 +1,22 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
-import Values from "../components/values"
-import WhatIDo from "../components/whatido"
 import SEO from "../components/seo"
 import Img from "gatsby-image"
 import { useTranslation } from "react-i18next"
+import styled from "styled-components"
 
 export const query = graphql`
   query {
-    image: file(relativePath: { eq: "idea.png" }) {
+    image: file(relativePath: { eq: "me.png" }) {
       childImageSharp {
-        fluid(
-          duotone: { highlight: "#141a46", shadow: "#ffffff" }
-          maxWidth: 546
-          maxHeight: 546
+        fixed(
+          duotone: { highlight: "#ec8b5e", shadow: "#141a46" }
+          width: 550
+          height: 550
+          quality: 100
         ) {
-          ...GatsbyImageSharpFluid
+          ...GatsbyImageSharpFixed
         }
       }
     }
@@ -27,45 +27,56 @@ const IndexPage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title={t("index.title")} />
+      <SEO />
       <section class="section">
-        <div class="container">
-          <div class="columns is-vcentered">
-            <div class="column">
-              <div class="content">
-                <h1 class="title">{t("index.opener")}</h1>
-                <h2 class="subtitle is-spaced">
-                  <strong> Senior Full-Stack Software Engineer</strong>
-                </h2>
-
-                <p class="has-text-weight-light">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                  irure dolor in reprehenderit in voluptate velit esse cillum
-                  dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                  cupidatat non proident, sunt in culpa qui officia deserunt
-                  mollit anim id est laborum.
-                </p>
-                <p class="has-text-weight-light">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                  laboris nisi ut aliquip ex ea commodo consequat.
-                </p>
+        <div class="section">
+          <div class="container">
+            <div class="columns is-centered">
+              <div class="column">
+                <div class="column is-offset-1">
+                  <Title>Cristian Pérez</Title>
+                  <div class="column">
+                    <div class="content">
+                      <div class="column is-four-fifths is-marginless is-paddingless">
+                        <h3 class="has-text-weight-light">
+                          Front-end engineer specializing in React with a focus
+                          on performance. Love huskies, really afraid of bees.
+                          
+                        </h3>
+                        
+                        <h4>#react #apollo #redux #webperf</h4>
+                        <br/>
+                        
+                        <div class="button is-primary is-large is-rounded">
+                          Want to know more? Continue
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div class="column is-5 is-offset-1">
-              <Img fluid={data.image.childImageSharp.fluid} alt="Ideas" />
+              <div class="column is-background">
+                <ImgContainer translateX="-65px">
+                  <Img
+                    className="has-radius-275"
+                    fixed={data.image.childImageSharp.fixed}
+                  />
+                </ImgContainer>
+              </div>
             </div>
           </div>
         </div>
       </section>
-      <WhatIDo />
-      <Values />
     </Layout>
   )
 }
 
 export default IndexPage
+
+const Title = styled.h1`
+  font: 9rem Monoton, sans-serif;
+  line-height: 10rem;
+`
+const ImgContainer = styled.div`
+  transform: translateX(${props => props.translateX});
+`

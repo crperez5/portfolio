@@ -2,14 +2,17 @@
   "en": {
     "translation": {
       "siteMetadata": {
-        "title": "CPM | Senior Full Stack Software Engineer",
-        "description": "CPM | Backend and Frontend Developer | Implementing solutions since 2011 | On-site and remote work"
+        "title": "Senior Full Stack Software Engineer | Cristian Pérez Matturro",
+        "description": "Backend and Frontend Developer | Implementing solutions since 2011 | On-site and remote work"
       },
       "notfound": {
         "title": "Not Found",
         "message": "You just hit a route that doesn't exist... the sadness."
       },
       "index": {
+        "title": ""
+      },
+      "about": {
         "title": "About me",
         "opener": "Hi, I'm Cristian."
       },
@@ -30,14 +33,17 @@
   "es": {
     "translation": {
       "siteMetadata": {
-        "title": "CPM | Ingeniero senior de Software Full Stack",
-        "description": "CPM | Desarrolador Backend y Frontend | Implementando soluciones desde 2011 | Trabajo presencial o en remoto"
+        "title": "Ingeniero senior de Software Full Stack | | Cristian Pérez Matturro",
+        "description": "Desarrolador Backend y Frontend | Implementando soluciones desde 2011 | Trabajo presencial o en remoto"
       },
       "notfound": {
         "title": "Página no encontrada",
         "message": "La página que ha solicitado no existe... lo siento."
       },
       "index": {
+        "title": ""
+      },
+      "about": {
         "title": "Sobre mí",
         "opener": "Hola, Soy Cristian."
       },

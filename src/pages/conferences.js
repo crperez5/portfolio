@@ -16,6 +16,7 @@ const client = new ContentfulClient({
 const nodesPerPage = 1
 
 const ConferencesPage = ({ data }) => {
+  
   const { t } = useTranslation()
 
   const totalCount = data.us.totalCount

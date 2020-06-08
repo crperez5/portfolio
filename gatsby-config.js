@@ -4,8 +4,8 @@ const { spaceId, accessToken } = require("./src/environment")
 module.exports = {
   siteMetadata: {
     siteUrl: "https://crperez.dev",
-    title: `CPM | Senior Full Stack Software Engineer`,
-    description: `CPM | Backend and Frontend Developer | Implementing solutions since 2011 | On-site and remote work`,
+    title: `Senior Full Stack Software Engineer | Cristian Pérez Matturro`,
+    description: `Backend and Frontend Developer | Implementing solutions since 2011 | On-site and remote work`,
     author: `crperez.informatica@gmail.com`,
     supportedLanguages: ["en", "es"],
     defaultLanguage: "en",
@@ -39,7 +39,7 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        // icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `src/images/logo.png`,
       },
     },
     {

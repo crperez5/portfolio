@@ -2,6 +2,10 @@
 @import "/variables";
 @import "~bulma/bulma.sass";
 
+.is-background {
+  z-index: -9999;
+}
+
 ::selection {
   background-color: $darkBlue;
   color: $white;
@@ -72,11 +76,9 @@ main {
   }
 }
 
-@each $radius in (6, 70) {
+@each $radius in (6, 275) {
   .has-radius-#{$radius} {
-    img {
-      border-radius: $radius + px;
-    }
+    border-radius: $radius + px;
   }
 }
 

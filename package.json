@@ -33,7 +33,8 @@
     "react-helmet": "^6.0.0",
     "react-i18n": "^1.0.1",
     "react-i18next": "^11.5.0",
-    "styled-components": "^5.1.0"
+    "styled-components": "^5.1.0",
+    "typeface-monoton": "0.0.72"
   },
   "devDependencies": {
     "prettier": "2.0.5"
