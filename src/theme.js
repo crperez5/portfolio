@@ -6,20 +6,26 @@ export default {
     @media screen and (min-width: ${device}px) {
         ${content}
     }`,
+
+    microScreen: content => `
+    @media screen and (min-width: 0) and (max-width: ${variables.micro}) {
+      ${content}
+  }
+    `,
     smallScreen: content => `
-    @media screen and (min-width: 0) and (max-width: ${variables.tablet}) {
+    @media screen and (min-width: ${
+      parseInt(variables.micro) + 1
+    }px) and (max-width: ${variables.tablet}) {
       ${content}
   }
     `,
     mediumScreen: content => `
-    @media screen and (min-width: ${variables.tablet}) and (max-width: ${
-      variables.desktop}) {
+    @media screen and (min-width: ${variables.tablet}) and (max-width: ${variables.desktop}) {
       ${content}
   }
     `,
     mediumLargeScreen: content => `
-    @media screen and (min-width: ${variables.desktop}) and (max-width: ${
-      variables.widescreen}) {
+    @media screen and (min-width: ${variables.desktop}) and (max-width: ${variables.widescreen}) {
       ${content}
   }
     `,

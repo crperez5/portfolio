@@ -67,7 +67,7 @@ const IndexPage = ({ data }) => {
         <div class="container">
           <div class="columns is-centered">
             <div class="column">
-              <div class="column is-offset-1 is-offset-1-widescreen is-offset-1-desktop is-offset-1-tablet">
+              <div class="column is-offset-1-widescreen is-offset-1-desktop is-offset-one-and-half-tablet">
                 <Title theme={theme}>Cristian Pérez</Title>
                 <div class="column">
                   <div class="content">
@@ -90,14 +90,21 @@ const IndexPage = ({ data }) => {
                 </div>
               </div>
             </div>
-            <div class="column is-background">
+            <div class="column is-background is-hidden-mobile">
               <StyledImg
                 theme={theme}
                 className="has-radius-275"
                 fluid={data.image.childImageSharp.fluid}
               />
             </div>
+            
           </div>
+          {/* <div class="section"></div> */}
+          <StyledImg
+            theme={theme}
+            className="has-radius-275 is-hidden-tablet"
+            fluid={data.image.childImageSharp.fluid}
+          />
         </div>
       </div>
     </Layout>
@@ -108,13 +115,24 @@ export default IndexPage
 
 const StyledImg = styled(Img)`
 ${({ theme }) => {
-  return theme.mixins.smallScreen(`
-    transform: translateX(-10px);
+  return theme.mixins.microScreen(`
+    position: absolute !important;
     overflow: hidden;
-    width: 300px;
-    height: 300px;
-    bottom: -79px;
-    left: -82px;
+    width: 200px;
+    height: 200px;
+    top: 50%;
+    left: -130px;
+    z-index: -1;
+  `)
+}}
+${({ theme }) => {
+  return theme.mixins.smallScreen(`
+    position: absolute !important;
+    overflow: hidden;
+    width: 250px;
+    height: 250px;
+    top: 50%;
+    left: -160px;
     z-index: -1;
   `)
 }}
@@ -123,14 +141,14 @@ ${({ theme }) => {
     return theme.mixins.mediumScreen(`
       width: 275px;
       height: 275px;
-      transform: translateX(-30px);
+      transform: translateX(-15px);
     `)
   }}
   ${({ theme }) => {
     return theme.mixins.mediumLargeScreen(`
     width: 400px;
     height: 400px;
-    transform: translateX(-40px);
+    transform: translateX(-60px);
     `)
   }}
   ${({ theme }) => {
@@ -144,7 +162,7 @@ ${({ theme }) => {
     return theme.mixins.extraLargeScreen(`
       width: 550px;
       height: 550px;
-      transform: translateX(-65px);
+      transform: translateX(-70px);
     `)
   }}  
 `
@@ -153,8 +171,15 @@ const Title = styled.h1`
   font: 9rem Monoton;
   line-height: 10rem;
   ${({ theme }) => {
+    return theme.mixins.microScreen(`
+    font-size: 3rem;
+    line-height: 3.5rem;
+    
+    `)
+  }}
+  ${({ theme }) => {
     return theme.mixins.smallScreen(`
-    font-size: 4rem;
+    font-size: 3.5rem;
     line-height: 4.5rem;
     
     `)

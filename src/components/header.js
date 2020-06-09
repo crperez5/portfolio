@@ -41,7 +41,7 @@ export default () => (
         <header class="section primary-background">
           <div class="container">
             <nav
-              class="navbar is-size-4 is-size-3-fullhd has-no-background"
+              class="navbar is-size-4 is-size-5-desktop is-size-4-widescreen is-size-4-fullhd has-no-background"
               role="navigation"
               aria-label="main navigation"
             >
@@ -85,7 +85,7 @@ export default () => (
                 className={"navbar-menu " + (burgerActive ? "is-active" : "")}
               >
                 <div class="navbar-start is-uppercase">
-                <Link
+                  <Link
                     className="has-no-background navbar-item"
                     activeClassName="is-active"
                     to="/"

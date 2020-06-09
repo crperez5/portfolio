@@ -2,6 +2,29 @@
 @import "/variables";
 @import "~bulma/bulma.sass";
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  -ms-overflow-style: none;
+  @include mobile {
+    touch-action: pan-y;
+  }
+  touch-action: none;
+}
+
+#gatsby-focus-wrapper {
+  outline: none;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.footer {
+  padding: 1rem 1.5rem 1rem;
+}
+
 .is-background {
   z-index: -9999;
 }
@@ -21,6 +44,7 @@ header {
 }
 
 main {
+  flex: 1;
   color: $darkBlue;
   .button {
     &:hover {
@@ -145,6 +169,16 @@ main {
   @include mobile {
     display: flex;
     width: 100%;
+  }
+}
+
+.column.is-offset-one-and-half {
+  margin-left: 12.33333%;
+}
+
+.column.is-offset-one-and-half-tablet {
+  @include tablet-only {
+    margin-left: 12.33333%;
   }
 }
 
