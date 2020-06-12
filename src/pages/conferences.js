@@ -7,23 +7,37 @@ import { spaceId as space, accessToken } from "../environment"
 import Grid from "../components/grid"
 import { useTranslation } from "react-i18next"
 import { usePageContext } from "../PageContext"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import { BLOCKS } from "@contentful/rich-text-types"
+import { itemsPerPage } from "../environment"
+
 const client = new ContentfulClient({
   accessToken,
   space,
 })
 
-const nodesPerPage = 1
+const options = {
+  renderNode: {
+    [BLOCKS.PARAGRAPH]: (_, children) => (
+      <p class="subtitle is-4">{children}</p>
+    ),
+  },
+}
 
 const ConferencesPage = ({ data }) => {
   const defaultLanguage = data.site.siteMetadata.defaultLanguage
   const { t } = useTranslation()
   const { lang } = usePageContext()
   const currentLanguage = lang ?? defaultLanguage
-  
-  const totalCount = data[currentLanguage].totalCount
-  const [nodes, setNodes] = useState(data[currentLanguage].nodes)
+
+  const totalCount = data[`data_${currentLanguage}`].totalCount
+  const [nodes, setNodes] = useState(data[`data_${currentLanguage}`].nodes)
   const [isLoading, setIsLoading] = useState(false)
   const [page, setPage] = useState(0)
+
+  const jsonIntro =
+    data[`intro_${currentLanguage}`].edges[0].node
+      .childContentfulStaticDescriptionContentRichTextNode.json
 
   const loadMore = () => {
     setIsLoading(true)
@@ -34,8 +48,8 @@ const ConferencesPage = ({ data }) => {
       client
         .getEntries({
           content_type: "EventAttendance",
-          skip: (page + 1) * nodesPerPage,
-          limit: nodesPerPage,
+          skip: (page + 1) * itemsPerPage,
+          limit: itemsPerPage,
           order: "-fields.date",
         })
         .then(function (result) {
@@ -59,13 +73,8 @@ const ConferencesPage = ({ data }) => {
         <div class="container">
           <div>
             <h2 class="title is-2 is-spaced">{t("conferences.title")}</h2>
-            <p class="subtitle is-4">
-              Lorem ipsum dolor sit amet, in vix meis corpora. Vim ne virtute
-              detracto offendit. Quis solet minimum te pri, et nec elitr mollis.
-              Ut quis probo intellegat mei, congue causae sensibus nec ut.
-            </p>
-
-            <div class="hr"></div>
+            {documentToReactComponents(jsonIntro, options)}
+            <div class="column"></div>
           </div>
 
           <Grid data={nodes}></Grid>
@@ -80,7 +89,7 @@ const ConferencesPage = ({ data }) => {
                 isLoading={isLoading}
                 totalCount={totalCount}
                 currentPage={page}
-                nodesPerPage={nodesPerPage}
+                itemsPerPage={itemsPerPage}
               ></LoadMoreButton>
             </div>
           </div>
@@ -95,9 +104,9 @@ const LoadMoreButton = ({
   isLoading,
   totalCount,
   currentPage,
-  nodesPerPage,
+  itemsPerPage,
 }) => {
-  const remaininigCount = totalCount - (currentPage + 1) * nodesPerPage
+  const remaininigCount = totalCount - (currentPage + 1) * itemsPerPage
   const { t } = useTranslation()
   return (
     remaininigCount > 0 && (
@@ -120,9 +129,31 @@ export const query = graphql`
         defaultLanguage
       }
     }
-    en: allContentfulEventAttendance(
+    intro_en: allContentfulStaticDescription(
+      filter: { type: { eq: "conferences" }, node_locale: { eq: "en-US" } }
+    ) {
+      edges {
+        node {
+          childContentfulStaticDescriptionContentRichTextNode {
+            json
+          }
+        }
+      }
+    }
+    intro_es: allContentfulStaticDescription(
+      filter: { type: { eq: "conferences" }, node_locale: { eq: "es-ES" } }
+    ) {
+      edges {
+        node {
+          childContentfulStaticDescriptionContentRichTextNode {
+            json
+          }
+        }
+      }
+    }
+    data_en: allContentfulEventAttendance(
       sort: { fields: [date], order: DESC }
-      limit: 1
+      limit: 10
       filter: { node_locale: { eq: "en-US" } }
     ) {
       totalCount
@@ -135,9 +166,9 @@ export const query = graphql`
         videoLink
       }
     }
-    es: allContentfulEventAttendance(
+    data_es: allContentfulEventAttendance(
       sort: { fields: [date], order: DESC }
-      limit: 1
+      limit: 10
       filter: { node_locale: { eq: "es-ES" } }
     ) {
       totalCount

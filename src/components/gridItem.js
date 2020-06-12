@@ -12,7 +12,9 @@ const GridItem = ({ item, forcePushUp }) => {
     description:
       typeof item.description !== "object"
         ? item.description
-        : item.description.description,
+        : item.description
+        ? item.description.description
+        : "",
   }
   return (
     <WrappedGridItem

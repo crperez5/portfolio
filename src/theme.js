@@ -3,7 +3,7 @@ import variables from "./_variables.scss"
 export default {
   mixins: {
     from: (device, content) => `
-    @media screen and (min-width: ${device}px) {
+    @media screen and (min-width: ${device}) {
         ${content}
     }`,
 
