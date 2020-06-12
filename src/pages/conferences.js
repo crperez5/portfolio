@@ -6,21 +6,22 @@ import { ContentfulClient } from "react-contentful"
 import { spaceId as space, accessToken } from "../environment"
 import Grid from "../components/grid"
 import { useTranslation } from "react-i18next"
-
+import { usePageContext } from "../PageContext"
 const client = new ContentfulClient({
   accessToken,
   space,
 })
 
-
 const nodesPerPage = 1
 
 const ConferencesPage = ({ data }) => {
-  
+  const defaultLanguage = data.site.siteMetadata.defaultLanguage
   const { t } = useTranslation()
-
-  const totalCount = data.us.totalCount
-  const [nodes, setNodes] = useState(data.us.nodes)
+  const { lang } = usePageContext()
+  const currentLanguage = lang ?? defaultLanguage
+  
+  const totalCount = data[currentLanguage].totalCount
+  const [nodes, setNodes] = useState(data[currentLanguage].nodes)
   const [isLoading, setIsLoading] = useState(false)
   const [page, setPage] = useState(0)
 
@@ -57,7 +58,7 @@ const ConferencesPage = ({ data }) => {
       <div class="section">
         <div class="container">
           <div>
-            <h2 class="title is-2 is-spaced">Conferences</h2>
+            <h2 class="title is-2 is-spaced">{t("conferences.title")}</h2>
             <p class="subtitle is-4">
               Lorem ipsum dolor sit amet, in vix meis corpora. Vim ne virtute
               detracto offendit. Quis solet minimum te pri, et nec elitr mollis.
@@ -97,13 +98,14 @@ const LoadMoreButton = ({
   nodesPerPage,
 }) => {
   const remaininigCount = totalCount - (currentPage + 1) * nodesPerPage
+  const { t } = useTranslation()
   return (
     remaininigCount > 0 && (
       <button
         class={`button is-size-3-tablet ${isLoading ? "is-loading" : ""}`}
         onClick={_ => onClick()}
       >
-        Load More ({remaininigCount})
+        {t("conferences.loadMore")} ({remaininigCount})
       </button>
     )
   )
@@ -113,7 +115,12 @@ export default ConferencesPage
 
 export const query = graphql`
   {
-    us: allContentfulEventAttendance(
+    site {
+      siteMetadata {
+        defaultLanguage
+      }
+    }
+    en: allContentfulEventAttendance(
       sort: { fields: [date], order: DESC }
       limit: 1
       filter: { node_locale: { eq: "en-US" } }

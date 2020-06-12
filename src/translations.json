@@ -23,7 +23,8 @@
         "title": "Projects"
       },
       "conferences": {
-        "title": "Conferences, Talks and Events"
+        "title": "Conferences, Talks and Events",
+        "loadMore": "Load More"
       },
       "contact": {
         "title": "Contact"
@@ -54,7 +55,8 @@
         "title": "Proyectos"
       },
       "conferences": {
-        "title": "Conferencias, Charlas y Eventos"
+        "title": "Conferencias, Charlas y Eventos",
+        "loadMore": "Cargar Más"
       },
       "contact": {
         "title": "Contacto"
