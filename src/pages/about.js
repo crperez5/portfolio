@@ -12,11 +12,11 @@ import { BLOCKS } from "@contentful/rich-text-types"
 
 const options = {
   renderNode: {
-    [BLOCKS.PARAGRAPH]: (node, children) => (
+    [BLOCKS.PARAGRAPH]: (_, children) => (
       <p class="has-text-weight-light">{children}</p>
     ),
-    [BLOCKS.HEADING_1]: (node, children) => <h1 class="title">{children}</h1>,
-    [BLOCKS.HEADING_2]: (node, children) => <h2 class="subtitle is-spaced">{children}</h2>,
+    [BLOCKS.HEADING_1]: (_, children) => <h1 class="title">{children}</h1>,
+    [BLOCKS.HEADING_2]: (_, children) => <h2 class="subtitle is-spaced">{children}</h2>,
   },
 }
 
@@ -40,7 +40,7 @@ const AboutPage = ({ data }) => {
               </div>
             </div>
             <div class="column is-5 is-offset-1">
-              <Img fluid={data.image.childImageSharp.fluid} alt="Ideas" />
+              <Img fluid={data.image.childImageSharp.fluid} />
             </div>
           </div>
         </div>

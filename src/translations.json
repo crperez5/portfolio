@@ -9,8 +9,16 @@
         "title": "Not Found",
         "message": "You just hit a route that doesn't exist... the sadness."
       },
+      "header": {
+        "home": "Home",
+        "about": "About",
+        "techStack": "Tech Stack",
+        "projects": "Projects",
+        "conferences": "Conferences",
+        "contact": "Contact"
+      },
       "index": {
-        "title": ""
+        "learnMore": "Want to know more? Continue"
       },
       "about": {
         "title": "About me",
@@ -49,8 +57,16 @@
         "title": "Página no encontrada",
         "message": "La página que ha solicitado no existe... lo siento."
       },
+      "header": {
+        "home": "Inicio",
+        "about": "Sobre mí",
+        "techStack": "Tech Stack",
+        "projects": "Proyectos",
+        "conferences": "Conferencias",
+        "contact": "Contacto"
+      },
       "index": {
-        "title": ""
+        "learnMore": "¿Quieres saber más? Continuar"
       },
       "about": {
         "title": "Sobre mí",

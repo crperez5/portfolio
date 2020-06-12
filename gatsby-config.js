@@ -7,8 +7,13 @@ module.exports = {
     title: `Senior Full Stack Software Engineer | Cristian Pérez Matturro`,
     description: `Backend and Frontend Developer | Implementing solutions since 2011 | On-site and remote work`,
     author: `crperez.informatica@gmail.com`,
+    authorName: "Cristian Pérez Matturro",
     supportedLanguages: ["en", "es"],
     defaultLanguage: "en",
+    relatedUrls: {
+      linkedin: "https://www.linkedin.com/in/cristianperezmatturro/",
+      github: "https://github.com/crperez5"
+    }
   },
   plugins: [
     `gatsby-plugin-sass`,

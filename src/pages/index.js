@@ -1,64 +1,38 @@
 import React from "react"
 import { graphql } from "gatsby"
+import Link  from "../components/link"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Img from "gatsby-image"
 import { useTranslation } from "react-i18next"
 import styled from "styled-components"
 import theme from "../theme"
+import { usePageContext } from "../PageContext"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import { BLOCKS } from "@contentful/rich-text-types"
 
-export const query = graphql`
-  query {
-    imageLarge: file(relativePath: { eq: "me.png" }) {
-      childImageSharp {
-        fixed(
-          duotone: { highlight: "#ec8b5e", shadow: "#141a46" }
-          width: 550
-          height: 550
-          quality: 100
-        ) {
-          ...GatsbyImageSharpFixed
-        }
-      }
-    }
-    imageMedium: file(relativePath: { eq: "me.png" }) {
-      childImageSharp {
-        fixed(
-          duotone: { highlight: "#ec8b5e", shadow: "#141a46" }
-          width: 400
-          height: 400
-          quality: 100
-        ) {
-          ...GatsbyImageSharpFixed
-        }
-      }
-    }
-    imageSmall: file(relativePath: { eq: "me.png" }) {
-      childImageSharp {
-        fixed(
-          duotone: { highlight: "#ec8b5e", shadow: "#141a46" }
-          width: 275
-          height: 275
-          quality: 100
-        ) {
-          ...GatsbyImageSharpFixed
-        }
-      }
-    }
-    image: file(relativePath: { eq: "me.png" }) {
-      childImageSharp {
-        fluid(
-          duotone: { highlight: "#ec8b5e", shadow: "#141a46" }
-          maxWidth: 550
-        ) {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-  }
-`
+const options = {
+  renderNode: {
+    [BLOCKS.HEADING_3]: (_, children) => (
+      <h3 class="has-text-weight-light is-size-4-fullhd is-size-4-widescreen is-size-4-desktop is-size-5-tablet is-size-5-mobile">
+        {children}
+      </h3>
+    ),
+    [BLOCKS.HEADING_4]: (_, children) => (
+      <h4 class="is-size-5-fullhd is-size-5-widescreen is-size-5-desktop is-size-6-tablet is-size-6-mobile">
+        {children}
+      </h4>
+    ),
+  },
+}
+
 const IndexPage = ({ data }) => {
   const { t } = useTranslation()
+  const { lang } = usePageContext()
+
+  const json =
+    data[lang].edges[0].node.childContentfulStaticDescriptionContentRichTextNode
+      .json
 
   return (
     <Layout>
@@ -72,19 +46,14 @@ const IndexPage = ({ data }) => {
                 <div class="column">
                   <div class="content">
                     <div class="column is-full-widescreen is-full-desktop is-full-size-tablet is-marginless is-paddingless">
-                      <h3 class="has-text-weight-light is-size-4-fullhd is-size-4-widescreen is-size-4-desktop is-size-5-tablet is-size-5-mobile">
-                        Front-end engineer specializing in React with a focus on
-                        performance. Love huskies, really afraid of bees.
-                      </h3>
-
-                      <h4 class="is-size-5-fullhd is-size-5-widescreen is-size-5-desktop is-size-6-tablet is-size-6-mobile">
-                        #react #apollo #redux #webperf
-                      </h4>
+                      {documentToReactComponents(json, options)}
                       <br />
-
-                      <div class="button is-fullwidth-mobile is-primary is-size-4-fullhd is-size-5-widescreen is-size-5-desktop is-rounded">
-                        Want to know more? Continue
-                      </div>
+                      <Link
+                        to="/about/"
+                        className="button is-fullwidth-mobile is-primary is-size-4-fullhd is-size-5-widescreen is-size-5-desktop is-rounded"
+                      >
+                        {t("index.learnMore")}
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -97,9 +66,7 @@ const IndexPage = ({ data }) => {
                 fluid={data.image.childImageSharp.fluid}
               />
             </div>
-            
           </div>
-          {/* <div class="section"></div> */}
           <StyledImg
             theme={theme}
             className="has-radius-275 is-hidden-tablet"
@@ -174,7 +141,6 @@ const Title = styled.h1`
     return theme.mixins.microScreen(`
     font-size: 3rem;
     line-height: 3.5rem;
-    
     `)
   }}
   ${({ theme }) => {
@@ -207,4 +173,77 @@ const Title = styled.h1`
       font-size:9rem;
     `)
   }}
+`
+
+export const query = graphql`
+  query {
+    en: allContentfulStaticDescription(
+      filter: { type: { eq: "home" }, node_locale: { eq: "en-US" } }
+    ) {
+      edges {
+        node {
+          childContentfulStaticDescriptionContentRichTextNode {
+            json
+          }
+        }
+      }
+    }
+    es: allContentfulStaticDescription(
+      filter: { type: { eq: "home" }, node_locale: { eq: "es-ES" } }
+    ) {
+      edges {
+        node {
+          childContentfulStaticDescriptionContentRichTextNode {
+            json
+          }
+        }
+      }
+    }
+    imageLarge: file(relativePath: { eq: "me.png" }) {
+      childImageSharp {
+        fixed(
+          duotone: { highlight: "#ec8b5e", shadow: "#141a46" }
+          width: 550
+          height: 550
+          quality: 100
+        ) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+    imageMedium: file(relativePath: { eq: "me.png" }) {
+      childImageSharp {
+        fixed(
+          duotone: { highlight: "#ec8b5e", shadow: "#141a46" }
+          width: 400
+          height: 400
+          quality: 100
+        ) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+    imageSmall: file(relativePath: { eq: "me.png" }) {
+      childImageSharp {
+        fixed(
+          duotone: { highlight: "#ec8b5e", shadow: "#141a46" }
+          width: 275
+          height: 275
+          quality: 100
+        ) {
+          ...GatsbyImageSharpFixed
+        }
+      }
+    }
+    image: file(relativePath: { eq: "me.png" }) {
+      childImageSharp {
+        fluid(
+          duotone: { highlight: "#ec8b5e", shadow: "#141a46" }
+          maxWidth: 550
+        ) {
+          ...GatsbyImageSharpFluid
+        }
+      }
+    }
+  }
 `
