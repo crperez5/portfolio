@@ -49,6 +49,7 @@ module.exports = {
         accessToken,
       },
     },
+    `@contentful/gatsby-transformer-contentful-richtext`,
     `gatsby-plugin-netlify`,
   ],
 }

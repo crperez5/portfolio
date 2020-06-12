@@ -31,6 +31,11 @@
       },
       "features": {
         "title": "What I <1>Do</1>"
+      },
+      "values": {
+        "title": "My <1>Values</1>",
+        "back": "Back",
+        "next": "Next"
       }
     }
   },
@@ -66,6 +71,11 @@
       },
       "features": {
         "title": "A qué me <1>dedico</1>"
+      },
+      "values": {
+        "title": "Mis <1>valores</1>",
+        "back": "Anterior",
+        "next": "Siguiente"
       }
     }
   }

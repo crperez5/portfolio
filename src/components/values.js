@@ -1,9 +1,14 @@
-import React from "react"
+import React, { useState } from "react"
 import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
+import { Trans, useTranslation } from "react-i18next"
+import { usePageContext } from "../PageContext"
 
 const Values = () => {
-  const data = useStaticQuery(graphql`
+  const [currentValue, setCurrentValue] = useState(0)
+  const { lang } = usePageContext()
+  const { t } = useTranslation()
+  const query = useStaticQuery(graphql`
     query {
       image: file(relativePath: { eq: "me-talk.jpg" }) {
         childImageSharp {
@@ -12,8 +17,27 @@ const Values = () => {
           }
         }
       }
+      en: allContentfulValue(filter: { node_locale: { eq: "en-US" } }) {
+        nodes {
+          title
+          description {
+            description
+          }
+        }
+      }
+
+      es: allContentfulValue(filter: { node_locale: { eq: "es-ES" } }) {
+        nodes {
+          title
+          description {
+            description
+          }
+        }
+      }
     }
   `)
+
+  const values = query[lang].nodes
 
   return (
     <>
@@ -22,7 +46,9 @@ const Values = () => {
         <div class="container">
           <div class="column has-text-centered">
             <p class="title is-2">
-              My <span class="underline-secondary">values</span>
+              <Trans i18nKey="values.title">
+                prefix <span class="underline-secondary">suffix</span>
+              </Trans>
             </p>
           </div>
         </div>
@@ -32,37 +58,45 @@ const Values = () => {
           <div class="container">
             <div class="column is-4 is-offset-7 skew-oppose value-box">
               <div class="box box-shadow-lift">
-                <div id="reason-1">
-                  <p class="title">Professionalism</p>
-                  <hr />
+                <div>
+                  {values.map(
+                    (v, i) =>
+                      currentValue === i && <p class="title">{v.title}</p>
+                  )}
 
-                  <p class="subtitle">
-                    Bring all of your social links together in one place.
-                    Instead of sharing 10 links, share{" "}
-                    <span class="underline-green">1 ultimate link</span> and
-                    utilize your{" "}
-                    <span class="underline-green">personal QR code</span> by
-                    having it on your business card, your mobile phone, in a
-                    video...anywhere.
-                  </p>
+                  <hr />
+                  {values.map(
+                    (v, i) =>
+                      currentValue === i && (
+                        <p class="subtitle">{v.description.description}</p>
+                      )
+                  )}
                 </div>
 
                 <hr />
                 <div class="buttons is-right">
                   <a
-                    id="back-button-1"
+                    disabled={currentValue === 0}
+                    onClick={() => {
+                      setCurrentValue(Math.max(0, currentValue - 1))
+                    }}
                     class="button is-rounded"
                     style={{ display: "flex" }}
                   >
-                    ← Back
+                    ← {t("values.back")}
                   </a>
 
                   <a
-                    id="button-2"
+                    disabled={currentValue === values.length - 1}
+                    onClick={() => {
+                      setCurrentValue(
+                        Math.min(values.length - 1, currentValue + 1)
+                      )
+                    }}
                     class="button is-rounded"
                     style={{ display: "flex" }}
                   >
-                    Next →
+                    {t("values.next")} →
                   </a>
                 </div>
               </div>
@@ -73,8 +107,7 @@ const Values = () => {
               <br />
               <Img
                 className="has-radius-6"
-                fixed={data.image.childImageSharp.fixed}
-                alt="My values"
+                fixed={query.image.childImageSharp.fixed}
               />
             </div>
           </div>
@@ -85,36 +118,44 @@ const Values = () => {
           <div class="column is-6 is-offset-3 skew-oppose">
             <div class="box box-shadow-lift">
               <div id="reason-1">
-                <p class="title is-4">Professionalism</p>
+                {values.map(
+                  (v, i) => currentValue === i && <p class="title">{v.title}</p>
+                )}
+
                 <hr />
 
-                <p class="subtitle">
-                  Bring all of your social links together in one place. Instead
-                  of sharing 10 links, share{" "}
-                  <span class="underline-green">1 ultimate link</span> and
-                  utilize your{" "}
-                  <span class="underline-green">personal QR code</span> by
-                  having it on your business card, your mobile phone, in a
-                  video...anywhere.
-                </p>
+                {values.map(
+                  (v, i) =>
+                    currentValue === i && (
+                      <p class="subtitle">{v.description.description}</p>
+                    )
+                )}
               </div>
 
               <hr />
               <div class="buttons is-right">
                 <a
-                  id="back-button-1"
+                  disabled={currentValue === 0}
+                  onClick={() => {
+                    setCurrentValue(Math.max(0, currentValue - 1))
+                  }}
                   class="button is-rounded"
                   style={{ display: "flex" }}
                 >
-                  ← Back
+                  ← {t("values.back")}
                 </a>
 
                 <a
-                  id="button-2"
+                  disabled={currentValue === values.length - 1}
+                  onClick={() => {
+                    setCurrentValue(
+                      Math.min(values.length - 1, currentValue + 1)
+                    )
+                  }}
                   class="button is-rounded"
                   style={{ display: "flex" }}
                 >
-                  Next →
+                  {t("values.next")} →
                 </a>
               </div>
             </div>
