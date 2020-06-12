@@ -17,6 +17,11 @@
         "conferences": "Conferences",
         "contact": "Contact"
       },
+      "footer": {
+        "builtWith": "Built with",
+        "english": "In English",
+        "spanish": "En Español"
+      },
       "index": {
         "learnMore": "Want to know more? Continue"
       },
@@ -64,6 +69,11 @@
         "projects": "Proyectos",
         "conferences": "Conferencias",
         "contact": "Contacto"
+      },
+      "footer": {
+        "builtWith": "App desarrollada con",
+        "english": "In English",
+        "spanish": "En Español"
       },
       "index": {
         "learnMore": "¿Quieres saber más? Continuar"
