@@ -12,6 +12,7 @@ const extractId = url => {
 
 export default function Video(props) {
   const [showVideo, setshowVideo] = useState(false)
+  const [showPlayIcon, setShowPlayIcon] = useState(false)
   const imageContainerRef = useRef()
 
   const url = props.url
@@ -26,12 +27,17 @@ export default function Video(props) {
         }}
         class="image"
       >
-        <PlayIcon
-          icon={faPlayCircle}
-          size="5x"
-          className="has-text-secondary has-background-light"
-        />
+        {showPlayIcon && (
+          <PlayIcon
+            icon={faPlayCircle}
+            size="5x"
+            className="has-text-secondary has-background-light"
+          />
+        )}
         <ImageContainer
+          onLoad={() => {
+            setShowPlayIcon(true)
+          }}
           ref={imageContainerRef}
           src={`https://img.youtube.com/vi/${id}/sddefault.jpg`}
         />
