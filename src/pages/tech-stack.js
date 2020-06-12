@@ -4,248 +4,131 @@ import SEO from "../components/seo"
 import variables from "../_variables.scss"
 import Icon from "../components/icon"
 import { useTranslation } from "react-i18next"
+import { usePageContext } from "../PageContext"
+import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
+import { BLOCKS } from "@contentful/rich-text-types"
 
 const iconStyle = {
   fill: variables.primary,
   width: "128px",
   height: "128px",
 }
-const TechStackPage = () => {
+
+const options = {
+  renderNode: {
+    [BLOCKS.PARAGRAPH]: (_, children) => (
+      <p class="has-text-weight-light">{children}</p>
+    ),
+  },
+}
+
+const TechStackPage = ({ data }) => {
   const { t } = useTranslation()
+  const { lang } = usePageContext()
+
+  const skillSets = data[lang].edges.map(e => {
+    return {
+      title: e.node.title,
+      technologies: e.node.technologies,
+      description: e.node.childContentfulSkillSetDescriptionRichTextNode.json,
+    }
+  })
+
   return (
     <Layout>
       <SEO title={t("tech-stack.title")} />
-      <section class="section">
-        <div class="container is-fullhd-container">
-          <div class="columns">
-            <div class="column is-one-third">
-              <div class="skills-description">
-                <h2 class="title is-3">
-                  <strong class="underline-secondary">Front-end</strong>
-                </h2>
-                <div class="content">
-                  <p class="has-text-weight-light">
-                    Lorem ipsum dolor sit amet, in vix meis corpora. Vim ne
-                    virtute detracto offendit. Quis solet minimum te pri, et nec
-                    elitr mollis. Ut quis probo intellegat mei, congue causae
-                    sensibus nec ut.
-                  </p>
-                  <p class="has-text-weight-light">
-                    Lorem ipsum dolor sit amet, in vix meis corpora. Vim ne
-                    virtute detracto offendit. Quis solet minimum te pri, et nec
-                    elitr mollis.
-                  </p>
+      {skillSets.map((skillSet, i) => {
+        return (
+          <>
+            <section class="section">
+              <div class="container is-fullhd-container">
+                <div class="columns">
+                  <div class="column is-one-third">
+                    <div class="skills-description">
+                      <h2 class="title is-3">
+                        <strong class="underline-secondary">
+                          {skillSet.title}
+                        </strong>
+                      </h2>
+                      <div class="content">
+                        {documentToReactComponents(
+                          skillSet.description,
+                          options
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="column">
+                    <div class="skills">
+                      {skillSet.technologies.map(t => (
+                        <div class="skills-item">
+                          <span title={t.name}>
+                            <Icon
+                              icon={t.icon}
+                              fill={iconStyle.fill}
+                              width={iconStyle.width}
+                              height={iconStyle.height}
+                            />
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="column">
-              <div class="skills">
-                <div class="skills-item">
-                  <Icon
-                    icon="javascript"
-                    fill={iconStyle.fill}
-                    width={iconStyle.width}
-                    height={iconStyle.height}
-                  />
-                </div>
-                <div class="skills-item">
-                  <Icon
-                    icon="typescript"
-                    fill={iconStyle.fill}
-                    width={iconStyle.width}
-                    height={iconStyle.height}
-                  />
-                </div>
-                <div class="skills-item">
-                  <Icon
-                    icon="angular"
-                    fill={iconStyle.fill}
-                    width={iconStyle.width}
-                    height={iconStyle.height}
-                  />
-                </div>
-                <div class="skills-item">
-                  <Icon
-                    icon="reactjs"
-                    fill={iconStyle.fill}
-                    width={iconStyle.width}
-                    height={iconStyle.height}
-                  />
-                </div>
-                <div class="skills-item">
-                  <Icon
-                    icon="gatsbyjs"
-                    fill={iconStyle.fill}
-                    width={iconStyle.width}
-                    height={iconStyle.height}
-                  />
-                </div>
-                <div class="skills-item">
-                  <Icon
-                    icon="ionic"
-                    fill={iconStyle.fill}
-                    width={iconStyle.width}
-                    height={iconStyle.height}
-                  />
-                </div>
-                <div class="skills-item">
-                  <Icon
-                    icon="css3"
-                    fill={iconStyle.fill}
-                    width={iconStyle.width}
-                    height={iconStyle.height}
-                  />
+            </section>
+            {skillSets.length - 1 > i && (
+              <div class="hr">
+                <div class="container">
+                  <hr />
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <div class="hr">
-        <div class="container">
-          <hr />
-        </div>
-      </div>
-      <section class="section">
-        <div class="container is-fullhd-container">
-          <div class="columns">
-            <div class="column is-one-third">
-              <div class="skills-description">
-                <h2 class="title is-3">
-                  <strong class="underline-secondary">Back-end</strong>
-                </h2>
-                <div class="content">
-                  <p class="has-text-weight-light">
-                    Lorem ipsum dolor sit amet, in vix meis corpora. Vim ne
-                    virtute detracto offendit. Quis solet minimum te pri, et nec
-                    elitr mollis. Ut quis probo intellegat mei, congue causae
-                    sensibus nec ut.
-                  </p>
-                  <p class="has-text-weight-light">
-                    Lorem ipsum dolor sit amet, in vix meis corpora. Vim ne
-                    virtute detracto offendit. Quis solet minimum te pri, et nec
-                    elitr mollis.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="column">
-              <div class="skills">
-                <div class="skills-item">
-                  <Icon
-                    icon="csharp"
-                    fill={iconStyle.fill}
-                    width={iconStyle.width}
-                    height={iconStyle.height}
-                  />
-                </div>
-                <div class="skills-item">
-                  <Icon
-                    icon="netcore"
-                    fill={iconStyle.fill}
-                    width={iconStyle.width}
-                    height={iconStyle.height}
-                  />
-                </div>
-                <div class="skills-item">
-                  <Icon
-                    icon="netfw"
-                    fill={iconStyle.fill}
-                    width={iconStyle.width}
-                    height={iconStyle.height}
-                  />
-                </div>
-                <div class="skills-item">
-                  <Icon
-                    icon="sql"
-                    fill={iconStyle.fill}
-                    width={iconStyle.width}
-                    height={iconStyle.height}
-                  />
-                </div>
-                <div class="skills-item">
-                  <Icon
-                    icon="serverless"
-                    fill={iconStyle.fill}
-                    width={iconStyle.width}
-                    height={iconStyle.height}
-                  />
-                </div>
-                <div class="skills-item">
-                  <Icon
-                    icon="mldotnet"
-                    fill={iconStyle.fill}
-                    width={iconStyle.width}
-                    height={iconStyle.height}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <div class="hr">
-        <div class="container">
-          <hr />
-        </div>
-      </div>
-      <section class="section">
-        <div class="container is-fullhd-container">
-          <div class="columns">
-            <div class="column is-one-third">
-              <div class="skills-description">
-                <h2 class="title is-3">
-                  <strong class="underline-secondary">DevOps</strong>
-                </h2>
-                <div class="content">
-                  <p class="has-text-weight-light">
-                    Lorem ipsum dolor sit amet, in vix meis corpora. Vim ne
-                    virtute detracto offendit. Quis solet minimum te pri, et nec
-                    elitr mollis. Ut quis probo intellegat mei, congue causae
-                    sensibus nec ut.
-                  </p>
-                  <p class="has-text-weight-light">
-                    Lorem ipsum dolor sit amet, in vix meis corpora. Vim ne
-                    virtute detracto offendit. Quis solet minimum te pri, et nec
-                    elitr mollis.
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div class="column">
-              <div class="skills">
-                <div class="skills-item">
-                  <Icon
-                    icon="powershell"
-                    fill={iconStyle.fill}
-                    width={iconStyle.width}
-                    height={iconStyle.height}
-                  />
-                </div>
-                <div class="skills-item">
-                  <Icon
-                    icon="vsts"
-                    fill={iconStyle.fill}
-                    width={iconStyle.width}
-                    height={iconStyle.height}
-                  />
-                </div>
-                <div class="skills-item">
-                  <Icon
-                    icon="docker"
-                    fill={iconStyle.fill}
-                    width={iconStyle.width}
-                    height={iconStyle.height}
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <div class="hr"></div>
+            )}
+          </>
+        )
+      })}
+      <div class="section is-medium"></div>
     </Layout>
   )
 }
 
 export default TechStackPage
+
+export const query = graphql`
+  query {
+    en: allContentfulSkillSet(
+      sort: { fields: createdAt, order: ASC }
+      filter: { node_locale: { eq: "en-US" } }
+    ) {
+      edges {
+        node {
+          childContentfulSkillSetDescriptionRichTextNode {
+            json
+          }
+          technologies {
+            name
+            icon
+          }
+          title
+        }
+      }
+    }
+    es: allContentfulSkillSet(
+      sort: { fields: createdAt, order: ASC }
+      filter: { node_locale: { eq: "es-ES" } }
+    ) {
+      edges {
+        node {
+          childContentfulSkillSetDescriptionRichTextNode {
+            json
+          }
+          technologies {
+            name
+            icon
+          }
+          title
+        }
+      }
+    }
+  }
+`
