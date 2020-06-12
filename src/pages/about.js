@@ -2,7 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import Values from "../components/values"
-import WhatIDo from "../components/whatido"
+import Features from "../components/features"
 import SEO from "../components/seo"
 import Img from "gatsby-image"
 import { useTranslation } from "react-i18next"
@@ -62,7 +62,7 @@ const AboutPage = ({ data }) => {
           </div>
         </div>
       </section>
-      <WhatIDo />
+      <Features />
       <Values />
     </Layout>
   )

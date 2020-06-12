@@ -28,6 +28,9 @@
       },
       "contact": {
         "title": "Contact"
+      },
+      "features": {
+        "title": "What I <1>Do</1>"
       }
     }
   },
@@ -60,6 +63,9 @@
       },
       "contact": {
         "title": "Contacto"
+      },
+      "features": {
+        "title": "A qué me <1>dedico</1>"
       }
     }
   }
