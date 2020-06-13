@@ -268,7 +268,7 @@ main {
       @include from($desktop) {
         position: absolute;
         top: 37px;
-        left: -7rem;
+        left: -6.1rem;
         content: attr(data-dates);
         transform: rotate(-90deg);
         width: 100px;

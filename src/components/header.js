@@ -29,6 +29,13 @@ export default () => {
               }
             }
           }
+          tabletImage: file(relativePath: { eq: "logo.png" }) {
+            childImageSharp {
+              fixed(width: 92, height: 92) {
+                ...GatsbyImageSharpFixed
+              }
+            }
+          }
           desktopImage: file(relativePath: { eq: "logo.png" }) {
             childImageSharp {
               fixed(width: 128, height: 128) {
@@ -43,10 +50,17 @@ export default () => {
         const toggleBurgerActive = () => setBurgerActive(!burgerActive)
 
         const sources = [
-          data.mobileImage.childImageSharp.fixed,
+          {
+            ...data.mobileImage.childImageSharp.fixed,
+            media: `(max-width: 768px)`,
+          },
+          {
+            ...data.tabletImage.childImageSharp.fixed,
+            media: `(min-width: 769px) and (width: 1024px)`,
+          },
           {
             ...data.desktopImage.childImageSharp.fixed,
-            media: `(min-width: 1024px)`,
+            media: `(min-width: 1025px)`,
           },
         ]
 
@@ -66,10 +80,10 @@ export default () => {
                     <Img className="has-radius-275" fixed={sources} />
                   </a>
                   <a
-                    className="navbar-item has-no-background"
+                    className="navbar-item has-no-background is-hidden-desktop"
                     href={data.site.siteMetadata.siteUrl}
                   >
-                    <strong className="title is-5 is-hidden-desktop">
+                    <strong className="title is-5 ">
                       {data.site.siteMetadata.authorName}
                     </strong>
                   </a>
