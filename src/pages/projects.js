@@ -111,18 +111,20 @@ const ProjectsPage = ({ data }) => {
                                       : t("projects.currentDate")}
                                   </h4>
                                   <div class="field is-grouped is-grouped-multiline is-hidden-mobile">
-                                    {p.roles.map(r => (
-                                      <div class="control">
-                                        <div class="tags has-addons">
-                                          <span class="tag is-large">
-                                            {t("projects.role")}
-                                          </span>
-                                          <span class="tag is-large is-primary">
-                                            {r.name}
-                                          </span>
-                                        </div>
+                                    <div class="control">
+                                      <div class="tags has-addons">
+                                        <span class="tag is-large">
+                                          {t("projects.role", {
+                                            count: p.roles.length,
+                                          })}
+                                        </span>
+                                        <span class="tag is-large is-primary">
+                                          {p.roles
+                                            .map(r => r.name.trim())
+                                            .join(", ")}
+                                        </span>
                                       </div>
-                                    ))}
+                                    </div>
 
                                     <div class="control">
                                       <div class="tags has-addons">
@@ -140,7 +142,7 @@ const ProjectsPage = ({ data }) => {
                                     {p.skills.map(s => (
                                       <div class="control">
                                         <span class="tag is-large is-primary">
-                                          {s.name}
+                                          {s.name.trim()}
                                         </span>
                                       </div>
                                     ))}
@@ -179,7 +181,7 @@ const ProjectsPage = ({ data }) => {
                                     {p.skills.map(s => (
                                       <div class="control">
                                         <span class="tag is-medium is-primary">
-                                          {s.name}
+                                          {s.name.trim()}
                                         </span>
                                       </div>
                                     ))}
