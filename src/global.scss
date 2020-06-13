@@ -225,7 +225,7 @@ main {
     content: "";
   }
   .vertical-tab + .vertical-tab {
-    margin-top: 2rem;
+    margin-top: 0.7rem;
   }
   .vertical-tab {
     &:hover {
@@ -269,7 +269,7 @@ main {
         position: absolute;
         top: 37px;
         left: -7rem;
-        content: "2018-20";
+        content: attr(data-dates);
         transform: rotate(-90deg);
         width: 100px;
         text-align: center;

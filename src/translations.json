@@ -33,10 +33,20 @@
         "title": "Technology Stack"
       },
       "projects": {
-        "title": "Projects"
+        "title": "Projects",
+        "currentDate": "current date",
+        "role": "Role",
+        "duration": "Duration",
+        "year": "year",
+        "year_plural": "years",
+        "yearWithCount": "{{count}} year",
+        "yearWithCount_plural": "{{count}} years",
+        "month": "month",
+        "month_plural": "months",
+        "monthWithCount": "{{count}} month",
+        "monthWithCount_plural": "{{count}} months"
       },
       "conferences": {
-        "title": "Conferences, Talks and Events",
         "loadMore": "Load More"
       },
       "contact": {
@@ -86,10 +96,20 @@
         "title": "Tecnologías"
       },
       "projects": {
-        "title": "Proyectos"
+        "title": "Proyectos",
+        "currentDate": "actualidad",
+        "role": "Rol",
+        "duration": "Duración",
+        "year": "año",
+        "year_plural": "años",
+        "yearWithCount": "{{count}} año",
+        "yearWithCount_plural": "{{count}} años",
+        "month": "mes",
+        "month_plural": "meses",
+        "monthWithCount": "{{count}} mes",
+        "monthWithCount_plural": "{{count}} meses"
       },
       "conferences": {
-        "title": "Conferencias, Charlas y Eventos",
         "loadMore": "Cargar Más"
       },
       "contact": {

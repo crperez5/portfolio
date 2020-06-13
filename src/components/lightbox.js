@@ -33,7 +33,6 @@ const LightboxModalContentCloseButton = styled.button`
   margin: 1rem;
 `
 const Lightbox = props => {
-
   const [showLightbox, setShowLightbox] = useState(false)
 
   const handleClick = e => {
@@ -48,7 +47,7 @@ const Lightbox = props => {
       </Figure>
       <LightboxModal onClick={handleClick} visible={showLightbox}>
         <LightboxModalContent maxWidth={props.maxWidth}>
-          <Img fluid={props.fluid} />
+          <Img fluid={{ ...props.fluid, aspectRatio: props.aspectRatio }} />
           <LightboxModalContentCloseButton className="delete is-large">
             {" "}
           </LightboxModalContentCloseButton>

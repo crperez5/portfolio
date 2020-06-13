@@ -21,6 +21,9 @@ const options = {
     [BLOCKS.PARAGRAPH]: (_, children) => (
       <p class="subtitle is-4">{children}</p>
     ),
+    [BLOCKS.HEADING_2]: (_, children) => (
+      <h2 class="title is-2 is-spaced">{children}</h2>
+    ),
   },
 }
 
@@ -72,7 +75,6 @@ const ConferencesPage = ({ data }) => {
       <div class="section">
         <div class="container">
           <div>
-            <h2 class="title is-2 is-spaced">{t("conferences.title")}</h2>
             {documentToReactComponents(jsonIntro, options)}
             <div class="column"></div>
           </div>
