@@ -1,14 +1,13 @@
 import React from "react"
 import styled from "styled-components"
-import variables from "../_variables.scss"
-import theme from "../theme"
 import Video from "../components/video"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEye } from "@fortawesome/free-solid-svg-icons"
 
-const GridItem = ({ item, forcePushUp }) => {
+const GridItem = ({ item, pushUp }) => {
   const mappedItem = {
     ...item,
+    pushUp,
     description:
       typeof item.description !== "object"
         ? item.description
@@ -16,72 +15,42 @@ const GridItem = ({ item, forcePushUp }) => {
         ? item.description.description
         : "",
   }
-  return (
-    <WrappedGridItem
-      {...mappedItem}
-      forcePushUp={forcePushUp}
-    ></WrappedGridItem>
-  )
+  return <WrappedGridItem {...mappedItem}></WrappedGridItem>
 }
 
 export default GridItem
 
-const wrapGridItem = Item => ({ ...props }) => {
-  return props.forcePushUp ? (
-    <StyledGridItemWrapper theme={theme}>
-      <Item {...props}></Item>
-    </StyledGridItemWrapper>
-  ) : (
-    <Item {...props}></Item>
-  )
-}
-
-const Item = ({ title, date, description, videoLink, forcePushUp }) => (
+const Item = ({ title, date, description, videoLink, pushUp }) => (
   <>
     <p class="title">
-      {title} <br />
+      {title}
+      <br />
       <span class="subtitle is-small" title="Watched on">
-        {" "}
         <FontAwesomeIcon icon={faEye} size="xs"></FontAwesomeIcon>{" "}
         {new Date(date).toLocaleDateString()}
       </span>
     </p>
-    <p class="subtitle">{description}</p>
-    {videoLink && (
-      <WrappedVideo url={videoLink} forcePushUp={forcePushUp}></WrappedVideo>
-    )}
+    <Subtitle fillSpace={pushUp} className="subtitle">
+      {description}
+    </Subtitle>
+    {videoLink && <Video url={videoLink}></Video>}
   </>
+)
+
+const wrapGridItem = Item => ({ ...props }) => (
+  <GridItemWrapper>
+    <Item {...props}></Item>
+  </GridItemWrapper>
 )
 
 const WrappedGridItem = wrapGridItem(Item)
 
-const StyledGridItemWrapper = styled.div`
-  ${({ theme }) =>
-    theme.mixins.from(
-      variables.tablet,
-      `
-  position: relative;
-  height: 100%;`
-    )}
+const GridItemWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 `
 
-const wrapVideo = Video => ({ children, ...props }) =>
-  props.forcePushUp ? (
-    <StyledVideoWrapper theme={theme}>
-      <Video {...props}>{children}</Video>
-    </StyledVideoWrapper>
-  ) : (
-    <Video {...props}>{children}</Video>
-  )
-
-const WrappedVideo = wrapVideo(Video)
-
-const StyledVideoWrapper = styled.div`
-  ${({ theme }) =>
-    theme.mixins.from(
-      variables.tablet,
-      `
-position: absolute;
-    bottom: 0;`
-    )}
+const Subtitle = styled.p`
+  ${({ fillSpace }) => (fillSpace ? "" : "flex-grow: 1")}
 `
