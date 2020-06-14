@@ -223,11 +223,7 @@ const ProjectsPage = ({ data }) => {
                                   {p.images &&
                                     p.images.map(i => (
                                       <div class="column is-half bd-snippet-preview">
-                                        <Lightbox
-                                          fluid={i.fluid}
-                                          maxWidth="1024px"
-                                          aspectRatio={4 / 3}
-                                        ></Lightbox>
+                                        <Lightbox image={i}></Lightbox>
                                       </div>
                                     ))}
                                 </div>
@@ -281,8 +277,11 @@ export const query = graphql`
         }
         videos
         images {
-          fluid(maxWidth: 1024) {
+          resize(width: 618, height: 464, quality: 100) {
             src
+          }
+          fluid(quality: 100, maxWidth: 1280) {
+            ...GatsbyContentfulFluid
           }
         }
       }
@@ -312,8 +311,11 @@ export const query = graphql`
         }
         videos
         images {
-          fluid(maxWidth: 1024) {
+          resize(width: 618, height: 464, quality: 100) {
             src
+          }
+          fluid(quality: 100, maxWidth: 1280) {
+            ...GatsbyContentfulFluid
           }
         }
       }
