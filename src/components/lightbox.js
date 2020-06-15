@@ -16,7 +16,7 @@ const Lightbox = props => {
         <img src={props.image.resize.src}></img>
       </Figure>
       <LightboxModal onClick={handleClick} visible={showLightbox}>
-        <div style={{ maxWidth: 1280, width: "100%" }}>
+        <div style={{ maxWidth: 1280, width: "80vw" }}>
           <Img fluid={props.image.fluid} />
         </div>
 
