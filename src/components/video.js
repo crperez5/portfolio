@@ -46,10 +46,10 @@ export default function Video(props) {
   ) : (
     <iframe
       class="has-ratio"
-      src={url + "?autoplay=1&showinfo=0&controls=0"}
+      src={url + "?autoplay=1&showinfo=0"}
       width="100%"
       height={imageContainerRef.current.clientHeight}
-      allow="autoplay;"
+      allow="autoplay;fullscreen"
     ></iframe>
   )
 }
