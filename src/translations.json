@@ -53,7 +53,18 @@
         "loadMore": "Load More"
       },
       "contact": {
-        "title": "Contact"
+        "title": "Contact",
+        "subtitle": "Get in touch.",
+        "name": "Name",
+        "email": "E-mail",
+        "message": "Message",
+        "howFeeling": "I'm looking for new challenges.",
+        "beforeQuestion": "Do you have a project in mind? Or need help in your company? If so, feel free to contact me.",
+        "beforeButtonText": "Submit",
+        "thankyou": "Thank you!",
+        "successMessage": "The email has been sent.",
+        "afterQuestion": "Would you like to continue browsing the site? Hit the button below.",
+        "afterButtonText": "Go to home page"
       },
       "features": {
         "title": "What I <1>Do</1>"
@@ -119,7 +130,18 @@
         "loadMore": "Cargar Más"
       },
       "contact": {
-        "title": "Contacto"
+        "title": "Contacto",
+        "subtitle": "Ponte en contacto.",
+        "name": "Nombre",
+        "email": "E-mail",
+        "message": "Mensaje",
+        "howFeeling": "Estoy buscando nuevos desafíos.",
+        "beforeQuestion": "¿Tienes algún proyecto en mente? ¿O necesitas ayuda en tu empresa? Si es así, no dudes en contactarme.",
+        "beforeButtonText": "Enviar",
+        "thankyou": "¡Muchas gracias!",
+        "successMessage": "Tu mensaje ha sido enviado.",
+        "afterQuestion": "¿Te gustaría seguir recorriendo el sitio? Dale al botón de abajo.",
+        "afterButtonText": "Ir a inicio"
       },
       "features": {
         "title": "A qué me <1>dedico</1>"
