@@ -101,7 +101,7 @@ const ProjectsPage = ({ data }) => {
                                   >
                                     {p.companyName}
                                   </h3>
-                                  <h4 class="subtitle is-hidden-tablet">
+                                  <h4 class="subtitle is-hidden-desktop">
                                     {new Date(p.startDate).getFullYear()}-
                                     {p.endDate
                                       ? new Date(p.endDate)

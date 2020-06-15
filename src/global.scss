@@ -213,16 +213,21 @@ main {
   position: relative;
   display: flex;
   flex-direction: column;
-  padding-left: 2rem;
+  @include from($desktop) {
+    padding-left: 2rem;
+  }
+
   &:before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 4px;
-    border-radius: 99em;
-    background-color: #f3f3f9;
-    content: "";
+    @include from($desktop) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 4px;
+      border-radius: 99em;
+      background-color: #f3f3f9;
+      content: "";
+    }
   }
   .vertical-tab + .vertical-tab {
     margin-top: 0.7rem;
@@ -247,16 +252,18 @@ main {
     transition-duration: 86ms;
     min-height: 106px;
     &:before {
-      position: absolute;
-      top: -2px;
-      left: -2rem;
-      bottom: -2px;
-      width: 4px;
-      border-radius: 99em;
-      background-color: $primary;
-      content: "";
-      opacity: 0;
-      transition-duration: 172ms;
+      @include from($desktop) {
+        position: absolute;
+        top: -2px;
+        left: -2rem;
+        bottom: -2px;
+        width: 4px;
+        border-radius: 99em;
+        background-color: $primary;
+        content: "";
+        opacity: 0;
+        transition-duration: 172ms;
+      }
     }
     .vertical-tab-year {
       transform: rotate(-90deg);

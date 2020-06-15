@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import styled from "styled-components"
 import Img from "gatsby-image"
-
+import theme from "../theme"
+import variables from "../_variables.scss"
 const Lightbox = props => {
   const [showLightbox, setShowLightbox] = useState(false)
 
@@ -16,9 +17,9 @@ const Lightbox = props => {
         <img src={props.image.resize.src}></img>
       </Figure>
       <LightboxModal onClick={handleClick} visible={showLightbox}>
-        <div style={{ maxWidth: 1280, width: "80vw" }}>
+        <LightboxModalInnerContainer>
           <Img fluid={props.image.fluid} />
-        </div>
+        </LightboxModalInnerContainer>
 
         <LightboxModalContentCloseButton className="delete is-large"></LightboxModalContentCloseButton>
       </LightboxModal>
@@ -30,6 +31,11 @@ export default Lightbox
 
 const Figure = styled.figure`
   cursor: pointer;
+`
+const LightboxModalInnerContainer = styled.div`
+  max-width: 1280px;
+  width: 100%;
+  ${() => theme.mixins.from(variables.desktop, "width: 80vw;")}
 `
 const LightboxModal = styled.div`
   display: flex;
