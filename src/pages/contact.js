@@ -58,7 +58,7 @@ const ContactPage = () => {
                   </div>
                 </div>
                 <div class="control">
-                  <button class="button is-primary is-medium">Submit</button>
+                  <button class="button is-rounded is-primary is-medium">Submit</button>
                 </div>
               </form>
             </div>
