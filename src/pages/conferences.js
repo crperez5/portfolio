@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next"
 import { usePageContext } from "../PageContext"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { BLOCKS } from "@contentful/rich-text-types"
-import { itemsPerPage } from "../environment"
+import { pageSize } from "../environment"
 
 const client = new ContentfulClient({
   accessToken,
@@ -51,8 +51,8 @@ const ConferencesPage = ({ data }) => {
       client
         .getEntries({
           content_type: "EventAttendance",
-          skip: (page + 1) * itemsPerPage,
-          limit: itemsPerPage,
+          skip: (page + 1) * pageSize,
+          limit: pageSize,
           order: "-fields.date",
         })
         .then(function (result) {
@@ -91,7 +91,7 @@ const ConferencesPage = ({ data }) => {
                 isLoading={isLoading}
                 totalCount={totalCount}
                 currentPage={page}
-                itemsPerPage={itemsPerPage}
+                pageSize={pageSize}
               ></LoadMoreButton>
             </div>
           </div>
@@ -106,9 +106,9 @@ const LoadMoreButton = ({
   isLoading,
   totalCount,
   currentPage,
-  itemsPerPage,
+  pageSize,
 }) => {
-  const remaininigCount = totalCount - (currentPage + 1) * itemsPerPage
+  const remaininigCount = totalCount - (currentPage + 1) * pageSize
   const { t } = useTranslation()
   return (
     remaininigCount > 0 && (
@@ -125,7 +125,7 @@ const LoadMoreButton = ({
 export default ConferencesPage
 
 export const query = graphql`
-  {
+  query($pageSize: Int!) {
     site {
       siteMetadata {
         defaultLanguage
@@ -155,7 +155,7 @@ export const query = graphql`
     }
     data_en: allContentfulEventAttendance(
       sort: { fields: [date], order: DESC }
-      limit: 10
+      limit: $pageSize
       filter: { node_locale: { eq: "en-US" } }
     ) {
       totalCount
@@ -170,7 +170,7 @@ export const query = graphql`
     }
     data_es: allContentfulEventAttendance(
       sort: { fields: [date], order: DESC }
-      limit: 10
+      limit: $pageSize
       filter: { node_locale: { eq: "es-ES" } }
     ) {
       totalCount

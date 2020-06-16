@@ -4,5 +4,5 @@ module.exports = {
   emailService: "lgmai",
   emailUser: "user_8yDfftvoyHwJK0D2xJSgv",
   emailTemplate: "template_JfYsoMR7",
-  itemsPerPage: 10,
+  pageSize: 2,
 }

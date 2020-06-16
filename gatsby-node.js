@@ -1,4 +1,6 @@
 const config = require("./gatsby-config")
+const env = require("./src/environment")
+
 /**
  * Makes sure to create localized paths for each file in the /pages folder.
  * For example, pages/404.js will be converted to /en/404.js and /el/404.js and
@@ -36,6 +38,7 @@ exports.onCreatePage = async ({
           ...page.context,
           originalPath,
           lang,
+          pageSize: env.pageSize,
         },
       })
     })
