@@ -22,10 +22,10 @@ export default GridItem
 
 const Item = ({ title, date, description, videoLink, pushUp }) => (
   <>
-    <p class="title">
+    <p className="title">
       {title}
       <br />
-      <span class="subtitle is-small" title="Watched on">
+      <span className="subtitle is-small" title="Watched on">
         <FontAwesomeIcon icon={faEye} size="xs"></FontAwesomeIcon>{" "}
         {new Date(date).toLocaleDateString()}
       </span>

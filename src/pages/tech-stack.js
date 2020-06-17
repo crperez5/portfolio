@@ -17,7 +17,7 @@ const iconStyle = {
 const options = {
   renderNode: {
     [BLOCKS.PARAGRAPH]: (_, children) => (
-      <p class="has-text-weight-light">{children}</p>
+      <p className="has-text-weight-light">{children}</p>
     ),
   },
 }
@@ -39,18 +39,18 @@ const TechStackPage = ({ data }) => {
       <SEO title={t("tech-stack.title")} />
       {skillSets.map((skillSet, i) => {
         return (
-          <>
-            <section class="section">
-              <div class="container is-fullhd-container">
-                <div class="columns">
-                  <div class="column is-one-third">
-                    <div class="skills-description">
-                      <h2 class="title is-3">
-                        <strong class="underline-secondary">
+          <div key={i}>
+            <section className="section">
+              <div className="container is-fullhd-container">
+                <div className="columns">
+                  <div className="column is-one-third">
+                    <div className="skills-description">
+                      <h2 className="title is-3">
+                        <strong className="underline-secondary">
                           {skillSet.title}
                         </strong>
                       </h2>
-                      <div class="content">
+                      <div className="content">
                         {documentToReactComponents(
                           skillSet.description,
                           options
@@ -58,10 +58,10 @@ const TechStackPage = ({ data }) => {
                       </div>
                     </div>
                   </div>
-                  <div class="column">
-                    <div class="skills">
-                      {skillSet.technologies.map(t => (
-                        <div class="skills-item">
+                  <div className="column">
+                    <div className="skills">
+                      {skillSet.technologies.map((t, i) => (
+                        <div key={i} className="skills-item">
                           <span title={t.name}>
                             <Icon
                               icon={t.icon}
@@ -78,16 +78,16 @@ const TechStackPage = ({ data }) => {
               </div>
             </section>
             {skillSets.length - 1 > i && (
-              <div class="hr">
-                <div class="container">
+              <div className="hr">
+                <div className="container">
                   <hr />
                 </div>
               </div>
             )}
-          </>
+          </div>
         )
       })}
-      <div class="section is-medium"></div>
+      <div className="section is-medium"></div>
     </Layout>
   )
 }

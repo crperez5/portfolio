@@ -14,7 +14,7 @@ const Lightbox = props => {
   return (
     <>
       <Figure onClick={handleClick}>
-        <img src={props.image.resize.src}></img>
+        <img alt="" src={props.image.resize.src}></img>
       </Figure>
       <LightboxModal onClick={handleClick} visible={showLightbox}>
         <LightboxModalInnerContainer>

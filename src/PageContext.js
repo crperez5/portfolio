@@ -8,7 +8,7 @@ export const PageContextProvider = ({ value, children }) => {
 
   useEffect(() => {
     i18n.changeLanguage(value.lang)
-  }, [])
+  }, [i18n, value.lang])
   return <PageContext.Provider value={value}>{children}</PageContext.Provider>
 }
 

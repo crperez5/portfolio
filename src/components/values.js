@@ -41,46 +41,46 @@ const Values = () => {
 
   return (
     <>
-      <section class="section">
+      <section className="section">
         <br />
-        <div class="container">
-          <div class="column has-text-centered">
-            <p class="title is-2">
+        <div className="container">
+          <div className="column has-text-centered">
+            <p className="title is-2">
               <Trans i18nKey="values.title">
-                prefix <span class="underline-secondary">suffix</span>
+                prefix <span className="underline-secondary">suffix</span>
               </Trans>
             </p>
           </div>
         </div>
       </section>
-      <section class="hero space is-medium is-hidden-touch">
-        <div class="hero-body">
-          <div class="container">
-            <div class="column is-4 is-offset-7 skew-oppose value-box">
-              <div class="box box-shadow-lift">
+      <section className="hero space is-medium is-hidden-touch">
+        <div className="hero-body">
+          <div className="container">
+            <div className="column is-4 is-offset-7 skew-oppose value-box">
+              <div className="box box-shadow-lift">
                 <div>
                   {values.map(
                     (v, i) =>
-                      currentValue === i && <p class="title">{v.title}</p>
+                      currentValue === i && <p key={i} className="title">{v.title}</p>
                   )}
 
                   <hr />
                   {values.map(
                     (v, i) =>
                       currentValue === i && (
-                        <p class="subtitle">{v.description.description}</p>
+                        <p key={i} className="subtitle">{v.description.description}</p>
                       )
                   )}
                 </div>
 
                 <hr />
-                <div class="buttons is-right">
-                  <a
+                <div className="buttons is-right">
+                  <a 
                     disabled={currentValue === 0}
                     onClick={() => {
                       setCurrentValue(Math.max(0, currentValue - 1))
                     }}
-                    class="button is-rounded"
+                    className="button is-rounded"
                     style={{ display: "flex" }}
                   >
                     ← {t("values.back")}
@@ -93,7 +93,7 @@ const Values = () => {
                         Math.min(values.length - 1, currentValue + 1)
                       )
                     }}
-                    class="button is-rounded"
+                    className="button is-rounded"
                     style={{ display: "flex" }}
                   >
                     {t("values.next")} →
@@ -101,7 +101,7 @@ const Values = () => {
                 </div>
               </div>
             </div>
-            <div class="column is-5 is-offset-3 skew-oppose">
+            <div className="column is-5 is-offset-3 skew-oppose">
               <br />
               <br />
               <br />
@@ -113,13 +113,13 @@ const Values = () => {
           </div>
         </div>
       </section>
-      <section class="section is-hidden-desktop space">
-        <div class="container">
-          <div class="column is-6 is-offset-3 skew-oppose">
-            <div class="box box-shadow-lift">
+      <section className="section is-hidden-desktop space">
+        <div className="container">
+          <div className="column is-6 is-offset-3 skew-oppose">
+            <div className="box box-shadow-lift">
               <div id="reason-1">
                 {values.map(
-                  (v, i) => currentValue === i && <p class="title">{v.title}</p>
+                  (v, i) => currentValue === i && <p key={i} className="title">{v.title}</p>
                 )}
 
                 <hr />
@@ -127,19 +127,19 @@ const Values = () => {
                 {values.map(
                   (v, i) =>
                     currentValue === i && (
-                      <p class="subtitle">{v.description.description}</p>
+                      <p key={i} className="subtitle">{v.description.description}</p>
                     )
                 )}
               </div>
 
               <hr />
-              <div class="buttons is-right">
+              <div className="buttons is-right">
                 <a
                   disabled={currentValue === 0}
                   onClick={() => {
                     setCurrentValue(Math.max(0, currentValue - 1))
                   }}
-                  class="button is-rounded"
+                  className="button is-rounded"
                   style={{ display: "flex" }}
                 >
                   ← {t("values.back")}
@@ -152,7 +152,7 @@ const Values = () => {
                       Math.min(values.length - 1, currentValue + 1)
                     )
                   }}
-                  class="button is-rounded"
+                  className="button is-rounded"
                   style={{ display: "flex" }}
                 >
                   {t("values.next")} →

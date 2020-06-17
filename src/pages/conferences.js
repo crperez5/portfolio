@@ -19,10 +19,10 @@ const client = new ContentfulClient({
 const options = {
   renderNode: {
     [BLOCKS.PARAGRAPH]: (_, children) => (
-      <p class="subtitle is-4">{children}</p>
+      <p className="subtitle is-4">{children}</p>
     ),
     [BLOCKS.HEADING_2]: (_, children) => (
-      <h2 class="title is-2 is-spaced">{children}</h2>
+      <h2 className="title is-2 is-spaced">{children}</h2>
     ),
   },
 }
@@ -48,44 +48,45 @@ const ConferencesPage = ({ data }) => {
 
   useEffect(() => {
     if (isLoading) {
-      client
-        .getEntries({
+      async function getEntries() {
+        const result = await client.getEntries({
           content_type: "EventAttendance",
           skip: (page + 1) * pageSize,
           limit: pageSize,
           order: "-fields.date",
         })
-        .then(function (result) {
-          const newNodes = result.items.map(n => {
-            return {
-              ...n.fields,
-            }
-          })
-
-          setPage(page + 1)
-          setIsLoading(false)
-          setNodes([...nodes, ...newNodes])
+        const newNodes = result.items.map(n => {
+          return {
+            ...n.fields,
+          }
         })
+
+        setPage(page + 1)
+        setIsLoading(false)
+        setNodes([...nodes, ...newNodes])
+      }
+
+      getEntries()
     }
   }, [isLoading])
 
   return (
     <Layout>
       <SEO title={t("conferences.title")} />
-      <div class="section">
-        <div class="container">
+      <div className="section">
+        <div className="container">
           <div>
             {documentToReactComponents(jsonIntro, options)}
-            <div class="column"></div>
+            <div className="column"></div>
           </div>
 
           <Grid data={nodes}></Grid>
         </div>
       </div>
-      <div class="section">
-        <div class="container has-text-centered">
-          <div class="columns">
-            <div class="column">
+      <div className="section">
+        <div className="container has-text-centered">
+          <div className="columns">
+            <div className="column">
               <LoadMoreButton
                 onClick={loadMore}
                 isLoading={isLoading}
@@ -113,7 +114,7 @@ const LoadMoreButton = ({
   return (
     remaininigCount > 0 && (
       <button
-        class={`button is-size-3-tablet ${isLoading ? "is-loading" : ""}`}
+        className={`button is-size-3-tablet ${isLoading ? "is-loading" : ""}`}
         onClick={_ => onClick()}
       >
         {t("conferences.loadMore")} ({remaininigCount})

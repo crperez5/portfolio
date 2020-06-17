@@ -15,24 +15,24 @@ export default () => {
 
   const { t } = useTranslation()
   return (
-    <footer class="footer">
-      <div class="container">
-        <div class="level">
-          <div class="level-left">
-            <div class="level-item">
-              <span class="is-hidden-mobile" style={{ "margin-right": "5px" }}>
+    <footer className="footer">
+      <div className="container">
+        <div className="level">
+          <div className="level-left">
+            <div className="level-item">
+              <span className="is-hidden-mobile" style={{ marginRight: "5px" }}>
                 {data.site.siteMetadata.authorName}
               </span>
               © {new Date().getFullYear()}, {t("footer.builtWith")}&nbsp;
               <a href="https://www.gatsbyjs.org">Gatsby</a>
             </div>
           </div>
-          <div class="level-right">
-            <div class="level-item">
+          <div className="level-right">
+            <div className="level-item">
               <a href="http://localhost:8000/en">{t("footer.english")}</a>
             </div>
-            <div class="level-item is-hidden-mobile">|</div>
-            <div class="level-item">
+            <div className="level-item is-hidden-mobile">|</div>
+            <div className="level-item">
               <a href="http://localhost:8000/es">{t("footer.spanish")}</a>
             </div>
           </div>

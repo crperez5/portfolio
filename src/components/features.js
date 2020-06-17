@@ -42,28 +42,28 @@ const Features = () => {
 
         return (
           <>
-            <section class="section">
+            <section className="section">
               <br />
-              <div class="container">
-                <div class="column has-text-centered">
-                  <p class="title is-2">
+              <div className="container">
+                <div className="column has-text-centered">
+                  <p className="title is-2">
                     <Trans i18nKey="features.title">
-                      prefix <span class="underline-secondary">suffix</span>
+                      prefix <span className="underline-secondary">suffix</span>
                     </Trans>
                   </p>
                 </div>
               </div>
             </section>
-            <section class="section">
-              <div class="container">
-                <div class="columns">
-                  {features.map(f => (
-                    <div class="column">
-                      <div class="card is-fullheight">
-                        <div class="card-content">
-                          <div class="content">
-                            <div class="columns">
-                              <div class="column">
+            <section className="section">
+              <div className="container">
+                <div className="columns">
+                  {features.map((f, index) => (
+                    <div key={index} className="column">
+                      <div className="card is-fullheight">
+                        <div className="card-content">
+                          <div className="content">
+                            <div className="columns">
+                              <div className="column">
                                 <FontAwesomeIcon
                                   icon={f.icon}
                                   size="2x"
@@ -71,8 +71,8 @@ const Features = () => {
                                 />
                               </div>
                             </div>
-                            <div class="columns">
-                              <div class="column">
+                            <div className="columns">
+                              <div className="column">
                                 <h3>{f.title}</h3>
                                 {f.description.description}
                               </div>

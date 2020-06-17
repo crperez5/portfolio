@@ -17,7 +17,7 @@ const Grid = ({ data }) => {
       {itemGroups.map((itemGroup, groupIndex) => {
         const isEven = isEvenItemGroup(itemGroup, groupIndex)
         return (
-          <div class="tile is-ancestor">
+          <div key={groupIndex} className="tile is-ancestor">
             {itemGroup.map((item, itemIndex) => {
               const sizeClass = getSizeClass(
                 itemIndex,
@@ -25,8 +25,8 @@ const Grid = ({ data }) => {
                 itemGroup.length
               )
               return (
-                <div class={"tile is-parent " + sizeClass}>
-                  <article class="tile is-child box">
+                <div key={itemIndex} className={"tile is-parent " + sizeClass}>
+                  <article className="tile is-child box">
                     <GridItem
                       item={item}
                       pushUp={!isEven && sizeClass.length === 0}

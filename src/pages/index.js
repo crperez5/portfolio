@@ -14,12 +14,12 @@ import { BLOCKS } from "@contentful/rich-text-types"
 const options = {
   renderNode: {
     [BLOCKS.HEADING_3]: (_, children) => (
-      <h3 class="has-text-weight-light is-size-4-fullhd is-size-4-widescreen is-size-4-desktop is-size-5-tablet is-size-5-mobile">
+      <h3 className="has-text-weight-light is-size-4-fullhd is-size-4-widescreen is-size-4-desktop is-size-5-tablet is-size-5-mobile">
         {children}
       </h3>
     ),
     [BLOCKS.HEADING_4]: (_, children) => (
-      <h4 class="is-size-5-fullhd is-size-5-widescreen is-size-5-desktop is-size-6-tablet is-size-6-mobile">
+      <h4 className="is-size-5-fullhd is-size-5-widescreen is-size-5-desktop is-size-6-tablet is-size-6-mobile">
         {children}
       </h4>
     ),
@@ -37,15 +37,15 @@ const IndexPage = ({ data }) => {
   return (
     <Layout>
       <SEO />
-      <div class="section">
-        <div class="container">
-          <div class="columns is-centered">
-            <div class="column">
-              <div class="column is-offset-1-widescreen is-offset-1-desktop is-offset-one-and-half-tablet">
+      <div className="section">
+        <div className="container">
+          <div className="columns is-centered">
+            <div className="column">
+              <div className="column is-offset-1-widescreen is-offset-1-desktop is-offset-one-and-half-tablet">
                 <Title theme={theme}>Cristian Pérez</Title>
-                <div class="column">
-                  <div class="content">
-                    <div class="column is-full-widescreen is-full-desktop is-full-size-tablet is-marginless is-paddingless">
+                <div className="column">
+                  <div className="content">
+                    <div className="column is-full-widescreen is-full-desktop is-full-size-tablet is-marginless is-paddingless">
                       {documentToReactComponents(json, options)}
                       <br />
                       <Link
@@ -59,7 +59,7 @@ const IndexPage = ({ data }) => {
                 </div>
               </div>
             </div>
-            <div class="column is-background is-hidden-mobile">
+            <div className="column is-background is-hidden-mobile">
               <StyledImg
                 theme={theme}
                 className="has-radius-275"

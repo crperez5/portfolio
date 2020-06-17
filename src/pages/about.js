@@ -13,10 +13,10 @@ import { BLOCKS } from "@contentful/rich-text-types"
 const options = {
   renderNode: {
     [BLOCKS.PARAGRAPH]: (_, children) => (
-      <p class="has-text-weight-light">{children}</p>
+      <p className="has-text-weight-light">{children}</p>
     ),
-    [BLOCKS.HEADING_1]: (_, children) => <h1 class="title">{children}</h1>,
-    [BLOCKS.HEADING_2]: (_, children) => <h2 class="subtitle is-spaced">{children}</h2>,
+    [BLOCKS.HEADING_1]: (_, children) => <h1 className="title">{children}</h1>,
+    [BLOCKS.HEADING_2]: (_, children) => <h2 className="subtitle is-spaced">{children}</h2>,
   },
 }
 
@@ -31,15 +31,15 @@ const AboutPage = ({ data }) => {
   return (
     <Layout>
       <SEO title={t("about.title")} />
-      <section class="section">
-        <div class="container">
-          <div class="columns is-vcentered">
-            <div class="column">
-              <div class="content">
+      <section className="section">
+        <div className="container">
+          <div className="columns is-vcentered">
+            <div className="column">
+              <div className="content">
                 {documentToReactComponents(json, options)}
               </div>
             </div>
-            <div class="column is-5 is-offset-1">
+            <div className="column is-5 is-offset-1">
               <Img fluid={data.image.childImageSharp.fluid} />
             </div>
           </div>
@@ -47,7 +47,7 @@ const AboutPage = ({ data }) => {
       </section>
       <Features />
       <Values />
-      <div class="section is-medium"></div>
+      <div className="section is-medium"></div>
     </Layout>
   )
 }

@@ -22,52 +22,50 @@ const ContactPage = () => {
     setState({ ...state, [e.target.name]: e.target.value })
   }
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     setLoading(true)
     e.preventDefault()
-    emailjs
-      .send(emailService, emailTemplate, {
+    try {
+      await emailjs.send(emailService, emailTemplate, {
         message_html: state.message,
         from_name: state.name,
         reply_to: state.email,
       })
-      .then(_ => {
-        setMessageSent(true)
-      })
-      .catch(_ => {
-        setLoading(false)
-      })
+      setMessageSent(true)
+    } catch (e) {
+      setLoading(false)
+    }
   }
   return (
     <Layout>
       <SEO title={t("contact.title")} />
-      <section class="section is-medium">
+      <section className="section is-medium">
         <Container className="container">
-          <div class="columns">
-            <div class="column is-5">
+          <div className="columns">
+            <div className="column is-5">
               {!messageSent && (
-                <div class="content">
+                <div className="content">
                   <Title className="title">{t("contact.subtitle")}</Title>
                   <Hr className="hr underline-secondary"></Hr>
 
-                  <h2 class="subtitle">{t("contact.howFeeling")}</h2>
-                  <p class="is-3 has-text-weight-light">
+                  <h2 className="subtitle">{t("contact.howFeeling")}</h2>
+                  <p className="is-3 has-text-weight-light">
                     {t("contact.beforeQuestion")}
                   </p>
                 </div>
               )}
               {messageSent && (
-                <div class="content">
+                <div className="content">
                   <Title className="title"> {t("contact.thankyou")}</Title>
                   <Hr className="hr underline-secondary"></Hr>
 
-                  <h2 class="subtitle">{t("contact.successMessage")}</h2>
-                  <p class="is-3 has-text-weight-light">
+                  <h2 className="subtitle">{t("contact.successMessage")}</h2>
+                  <p className="is-3 has-text-weight-light">
                     {t("contact.afterQuestion")}
                   </p>
                   <Link to="/">
                     <button
-                      class="button is-rounded is-primary is-medium"
+                      className="button is-rounded is-primary is-medium"
                       type="submit"
                     >
                       {t("contact.afterButtonText")}
@@ -76,12 +74,12 @@ const ContactPage = () => {
                 </div>
               )}
             </div>
-            <div class="column is-offset-1 is-6">
+            <div className="column is-offset-1 is-6">
               {!messageSent && (
                 <form onSubmit={handleSubmit}>
-                  <div class="field">
-                    <label class="label">{t("contact.name")}</label>
-                    <div class="control">
+                  <div className="field">
+                    <label className="label">{t("contact.name")}</label>
+                    <div className="control">
                       <Input
                         required
                         className="input is-medium has-background-light"
@@ -91,9 +89,9 @@ const ContactPage = () => {
                       />
                     </div>
                   </div>
-                  <div class="field">
-                    <label class="label">{t("contact.email")}</label>
-                    <div class="control">
+                  <div className="field">
+                    <label className="label">{t("contact.email")}</label>
+                    <div className="control">
                       <Input
                         required
                         className="input is-medium has-background-light"
@@ -103,9 +101,9 @@ const ContactPage = () => {
                       />
                     </div>
                   </div>
-                  <div class="field">
-                    <label class="label">{t("contact.message")}</label>
-                    <div class="control">
+                  <div className="field">
+                    <label className="label">{t("contact.message")}</label>
+                    <div className="control">
                       <TextArea
                         required
                         className="textarea is-medium has-background-light"
@@ -114,9 +112,9 @@ const ContactPage = () => {
                       ></TextArea>
                     </div>
                   </div>
-                  <div class="control">
+                  <div className="control">
                     <button
-                      class={`button is-rounded is-primary is-medium ${
+                      className={`button is-rounded is-primary is-medium ${
                         loading ? "is-loading" : ""
                       }`}
                       type="submit"

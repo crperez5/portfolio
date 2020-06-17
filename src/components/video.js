@@ -25,7 +25,7 @@ export default function Video(props) {
         onClick={() => {
           setshowVideo(true)
         }}
-        class="image"
+        className="image"
       >
         {showPlayIcon && (
           <PlayIcon
@@ -45,7 +45,7 @@ export default function Video(props) {
     </div>
   ) : (
     <iframe
-      class="has-ratio"
+      className="has-ratio"
       src={url + "?autoplay=1&showinfo=0"}
       width="100%"
       height={imageContainerRef.current.clientHeight}

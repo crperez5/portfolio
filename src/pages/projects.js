@@ -45,45 +45,45 @@ const ProjectsPage = ({ data }) => {
   return (
     <Layout>
       <SEO title={t("projects.title")} />
-      <section class="section">
-        <div class="container">
-          <div class="columns is-centered">
-            <div class="column is-12">
-              <div class="columns is-vcentered">
-                <div class="column">
+      <section className="section">
+        <div className="container">
+          <div className="columns is-centered">
+            <div className="column is-12">
+              <div className="columns is-vcentered">
+                <div className="column">
                   <div>
                     {documentToReactComponents(pageDescriptionMetadata, {
                       renderNode: {
                         [BLOCKS.PARAGRAPH]: (_, children) => (
-                          <p class="subtitle is-4">{children}</p>
+                          <p className="subtitle is-4">{children}</p>
                         ),
                         [BLOCKS.HEADING_1]: (_, children) => (
-                          <h1 class="title">{children}</h1>
+                          <h1 className="title">{children}</h1>
                         ),
                         [BLOCKS.HEADING_2]: (_, children) => (
-                          <h2 class="title is-2 is-spaced">{children}</h2>
+                          <h2 className="title is-2 is-spaced">{children}</h2>
                         ),
                       },
                     })}
-                    <div class="column"></div>
+                    <div className="column"></div>
                   </div>
                   <div>
-                    <div class="vertical-timeline-tabs">
+                    <div className="vertical-timeline-tabs">
                       {projects.map((p, i) => {
                         return (
-                          <>
+                          <div key={i}>
                             <div
-                              class={`vertical-tab ${
+                              className={`vertical-tab ${
                                 !p.endDate ? "is-active" : ""
                               }`}
                             >
-                              <div class="media">
-                                <div class="media-left">
-                                  <figure class="image is-96x96">
+                              <div className="media">
+                                <div className="media-left">
+                                  <figure className="image is-96x96">
                                     <img src={p.companyAvatar.resize.src} />
                                   </figure>
                                 </div>
-                                <div class="media-content">
+                                <div className="media-content">
                                   <h3
                                     data-dates={`${new Date(
                                       p.startDate
@@ -98,25 +98,25 @@ const ProjectsPage = ({ data }) => {
                                             .toString()
                                             .slice(-2)
                                     }`}
-                                    class="title is-4"
+                                    className="title is-4"
                                   >
                                     {p.companyName}
                                   </h3>
-                                  <div class="is-size-5 mt-1 is-hidden-desktop">
+                                  <div className="is-size-5 mt-1 is-hidden-desktop">
                                     <FontAwesomeIcon
                                       icon="map-marker-alt"
                                       className="has-text-secondary"
                                     />{" "}
                                     <span>{p.locations.join(", ")}</span>
                                   </div>
-                                  <div class="is-size-5 mt-1 mb-5 is-hidden-mobile is-hidden-tablet-only">
+                                  <div className="is-size-5 mt-1 mb-5 is-hidden-mobile is-hidden-tablet-only">
                                     <FontAwesomeIcon
                                       icon="map-marker-alt"
                                       className="has-text-secondary"
                                     />{" "}
                                     <span>{p.locations.join(", ")}</span>
                                   </div>
-                                  <h4 class="is-size-5 is-hidden-desktop mb-2">
+                                  <h4 className="is-size-5 is-hidden-desktop mb-2">
                                     {new Date(p.startDate).getFullYear()}-
                                     {p.endDate ? (
                                       new Date(p.endDate)
@@ -124,20 +124,20 @@ const ProjectsPage = ({ data }) => {
                                         .toString()
                                         .slice(-2)
                                     ) : (
-                                      <span class="is-italic">
+                                      <span className="is-italic">
                                         {t("projects.currentDate")}
                                       </span>
                                     )}
                                   </h4>
-                                  <div class="field is-grouped is-grouped-multiline is-hidden-mobile">
-                                    <div class="control">
-                                      <div class="tags has-addons">
-                                        <span class="tag is-large">
+                                  <div className="field is-grouped is-grouped-multiline is-hidden-mobile">
+                                    <div className="control">
+                                      <div className="tags has-addons">
+                                        <span className="tag is-large">
                                           {t("projects.role", {
                                             count: p.roles.length,
                                           })}
                                         </span>
-                                        <span class="tag is-large is-primary">
+                                        <span className="tag is-large is-primary">
                                           {p.roles
                                             .map(r => r.name.trim())
                                             .join(", ")}
@@ -145,12 +145,12 @@ const ProjectsPage = ({ data }) => {
                                       </div>
                                     </div>
 
-                                    <div class="control">
-                                      <div class="tags has-addons">
-                                        <span class="tag is-large">
+                                    <div className="control">
+                                      <div className="tags has-addons">
+                                        <span className="tag is-large">
                                           {t("projects.duration")}
                                         </span>
-                                        <span class="tag is-large is-primary">
+                                        <span className="tag is-large is-primary">
                                           {getDateDifference(
                                             p.startDate,
                                             p.endDate
@@ -158,9 +158,9 @@ const ProjectsPage = ({ data }) => {
                                         </span>
                                       </div>
                                     </div>
-                                    {p.skills.map(s => (
-                                      <div class="control">
-                                        <span class="tag is-large is-primary">
+                                    {p.skills.map((s, skillIndex) => (
+                                      <div key={skillIndex} className="control">
+                                        <span className="tag is-large is-primary">
                                           {s.name.trim()}
                                         </span>
                                       </div>
@@ -169,37 +169,37 @@ const ProjectsPage = ({ data }) => {
                                 </div>
                               </div>
 
-                              <div class="level is-hidden-tablet">
-                                <div class="level-left">
-                                  <div class="field is-grouped is-grouped-multiline">
-                                    {p.roles.map(r => (
-                                      <p class="control">
-                                        <div class="tags has-addons">
-                                          <span class="tag is-medium">
+                              <div className="level is-hidden-tablet">
+                                <div className="level-left">
+                                  <div className="field is-grouped is-grouped-multiline">
+                                    {p.roles.map((r, roleIndex) => (
+                                      <div key={roleIndex} className="control">
+                                        <div className="tags has-addons">
+                                          <span className="tag is-medium">
                                             {t("projects.role")}
                                           </span>
-                                          <span class="tag is-medium is-primary">
+                                          <span className="tag is-medium is-primary">
                                             {r.name}
                                           </span>
                                         </div>
-                                      </p>
+                                      </div>
                                     ))}
-                                    <p class="control">
-                                      <div class="tags has-addons">
-                                        <span class="tag is-medium">
+                                    <div className="control">
+                                      <div className="tags has-addons">
+                                        <span className="tag is-medium">
                                           {t("projects.duration")}
                                         </span>
-                                        <span class="tag is-medium is-primary">
+                                        <span className="tag is-medium is-primary">
                                           {getDateDifference(
                                             p.startDate,
                                             p.endDate
                                           )}
                                         </span>
                                       </div>
-                                    </p>
-                                    {p.skills.map(s => (
-                                      <div class="control">
-                                        <span class="tag is-medium is-primary">
+                                    </div>
+                                    {p.skills.map((s, skillIndex) => (
+                                      <div key={skillIndex} className="control">
+                                        <span className="tag is-medium is-primary">
                                           {s.name.trim()}
                                         </span>
                                       </div>
@@ -213,13 +213,13 @@ const ProjectsPage = ({ data }) => {
                                 {
                                   renderNode: {
                                     [BLOCKS.PARAGRAPH]: (_, children) => (
-                                      <p class="subtitle">{children}</p>
+                                      <p className="subtitle">{children}</p>
                                     ),
                                     [BLOCKS.HEADING_1]: (_, children) => (
-                                      <h1 class="title">{children}</h1>
+                                      <h1 className="title">{children}</h1>
                                     ),
                                     [BLOCKS.HEADING_2]: (_, children) => (
-                                      <h2 class="subtitle is-spaced">
+                                      <h2 className="subtitle is-spaced">
                                         {children}
                                       </h2>
                                     ),
@@ -230,18 +230,24 @@ const ProjectsPage = ({ data }) => {
                               {(p.videos || p.images) && (
                                 <div
                                   title="Media"
-                                  class="columns is-multiline bd-snippet bd-is-horizontal bd-is-2"
+                                  className="columns is-multiline bd-snippet bd-is-horizontal bd-is-2"
                                 >
                                   {p.videos &&
-                                    p.videos.map(v => (
-                                      <div class="column is-half bd-snippet-preview ">
+                                    p.videos.map((v, videoIndex) => (
+                                      <div
+                                        key={videoIndex}
+                                        className="column is-half bd-snippet-preview "
+                                      >
                                         <Video url={v}></Video>
                                       </div>
                                     ))}
 
                                   {p.images &&
-                                    p.images.map(i => (
-                                      <div class="column is-half bd-snippet-preview">
+                                    p.images.map((i, imageIndex) => (
+                                      <div
+                                        key={imageIndex}
+                                        className="column is-half bd-snippet-preview"
+                                      >
                                         <Lightbox image={i}></Lightbox>
                                       </div>
                                     ))}
@@ -249,11 +255,11 @@ const ProjectsPage = ({ data }) => {
                               )}
                             </div>
                             {projects.length - 1 > i && (
-                              <div class="vertical-tab">
-                                <div class="is-divider is-hidden-desktop"></div>
+                              <div className="vertical-tab">
+                                <div className="is-divider is-hidden-desktop"></div>
                               </div>
                             )}
-                          </>
+                          </div>
                         )
                       })}
                     </div>
@@ -264,7 +270,7 @@ const ProjectsPage = ({ data }) => {
           </div>
         </div>
       </section>
-      <section class="section"></section>
+      <section className="section"></section>
     </Layout>
   )
 }
