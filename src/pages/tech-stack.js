@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next"
 import { usePageContext } from "../PageContext"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { BLOCKS } from "@contentful/rich-text-types"
+import { graphql } from 'gatsby' 
 
 const iconStyle = {
   fill: variables.primary,
