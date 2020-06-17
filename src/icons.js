@@ -5,6 +5,7 @@ import {
   faServer,
   faTerminal,
   faUsers,
+  faMapMarkerAlt
 } from "@fortawesome/free-solid-svg-icons"
 
-library.add(faSitemap, faCode, faServer, faTerminal, faUsers)
+library.add(faSitemap, faCode, faServer, faTerminal, faUsers, faMapMarkerAlt)

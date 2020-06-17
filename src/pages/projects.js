@@ -10,6 +10,7 @@ import Video from "../components/video"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { BLOCKS } from "@contentful/rich-text-types"
 import moment from "moment"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const getDateDifference = (start, end) => {
   const startMoment = moment(start)
@@ -101,14 +102,32 @@ const ProjectsPage = ({ data }) => {
                                   >
                                     {p.companyName}
                                   </h3>
-                                  <h4 class="subtitle is-hidden-desktop">
+                                  <div class="is-size-5 mt-1 is-hidden-desktop">
+                                    <FontAwesomeIcon
+                                      icon="map-marker-alt"
+                                      className="has-text-secondary"
+                                    />{" "}
+                                    <span>{p.locations.join(", ")}</span>
+                                  </div>
+                                  <div class="is-size-5 mt-1 mb-5 is-hidden-mobile is-hidden-tablet-only">
+                                    <FontAwesomeIcon
+                                      icon="map-marker-alt"
+                                      className="has-text-secondary"
+                                    />{" "}
+                                    <span>{p.locations.join(", ")}</span>
+                                  </div>
+                                  <h4 class="is-size-5 is-hidden-desktop mb-2">
                                     {new Date(p.startDate).getFullYear()}-
-                                    {p.endDate
-                                      ? new Date(p.endDate)
-                                          .getFullYear()
-                                          .toString()
-                                          .slice(-2)
-                                      : t("projects.currentDate")}
+                                    {p.endDate ? (
+                                      new Date(p.endDate)
+                                        .getFullYear()
+                                        .toString()
+                                        .slice(-2)
+                                    ) : (
+                                      <span class="is-italic">
+                                        {t("projects.currentDate")}
+                                      </span>
+                                    )}
                                   </h4>
                                   <div class="field is-grouped is-grouped-multiline is-hidden-mobile">
                                     <div class="control">
@@ -230,7 +249,9 @@ const ProjectsPage = ({ data }) => {
                               )}
                             </div>
                             {projects.length - 1 > i && (
-                              <div class="vertical-tab"></div>
+                              <div class="vertical-tab">
+                                <div class="is-divider is-hidden-desktop"></div>
+                              </div>
                             )}
                           </>
                         )
