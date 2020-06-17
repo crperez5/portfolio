@@ -64,12 +64,12 @@ const TechStackPage = ({ data }) => {
                       {skillSet.technologies.map((t, i) => (
                         <div key={i} className="skills-item">
                           <span title={t.name}>
-                            {/* <Icon
+                            <Icon
                               icon={t.icon}
                               fill={iconStyle.fill}
                               width={iconStyle.width}
                               height={iconStyle.height}
-                            /> */}
+                            />
                           </span>
                         </div>
                       ))}
