@@ -1,5 +1,8 @@
 const path = require(`path`)
-const { spaceId, accessToken } = require("./src/environment")
+
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
 
 module.exports = {
   siteMetadata: {
@@ -50,8 +53,8 @@ module.exports = {
     {
       resolve: `gatsby-source-contentful`,
       options: {
-        spaceId,
-        accessToken,
+        spaceId: process.env.GATSBY_PORTFOLIO_SPACE_ID,
+        accessToken: process.env.GATSBY_PORTFOLIO_ACCESS_TOKEN,
       },
     },
     `@contentful/gatsby-transformer-contentful-richtext`,

@@ -4,7 +4,7 @@ import SEO from "../components/seo"
 import styled from "styled-components"
 import variables from "../_variables.scss"
 import { useTranslation } from "react-i18next"
-import { emailService, emailUser, emailTemplate } from "../environment"
+import { emailService, emailTemplate } from "../environment"
 import emailjs from "emailjs-com"
 import Link from "../components/link"
 
@@ -15,7 +15,7 @@ const ContactPage = () => {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    emailjs.init(emailUser)
+    emailjs.init(process.env.GATSBY_PORTFOLIO_EMAIL_USER)
   }, [])
 
   const handleInputChange = e => {

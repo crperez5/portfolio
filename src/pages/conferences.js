@@ -3,7 +3,6 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { graphql } from "gatsby"
 import { ContentfulClient } from "react-contentful"
-import { spaceId as space, accessToken } from "../environment"
 import Grid from "../components/grid"
 import { useTranslation } from "react-i18next"
 import { usePageContext } from "../PageContext"
@@ -12,8 +11,8 @@ import { BLOCKS } from "@contentful/rich-text-types"
 import { pageSize } from "../environment"
 
 const client = new ContentfulClient({
-  accessToken,
-  space,
+  accessToken: process.env.GATSBY_PORTFOLIO_ACCESS_TOKEN,
+  space: process.env.GATSBY_PORTFOLIO_SPACE_ID,
 })
 
 const options = {
