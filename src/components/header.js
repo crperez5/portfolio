@@ -122,7 +122,7 @@ export default () => {
                     <Link
                       className="has-no-background navbar-item"
                       activeClassName="is-active"
-                      to="/about"
+                      to="/about/"
                     >
                       <span className="navbar-item-name">
                         {t("header.about")}
