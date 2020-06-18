@@ -109,7 +109,7 @@ main {
 
 .primary-background {
   @include from($desktop) {
-    background-image: url(./images/header-background.svg);
+    background-image: url(images/header-background.svg);
   }
 }
 
