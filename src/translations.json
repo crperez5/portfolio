@@ -7,7 +7,9 @@
       },
       "notfound": {
         "title": "Not Found",
-        "message": "You just hit a route that doesn't exist... the sadness."
+        "message": "You just hit a route that doesn't exist... the sadness.",
+        "suggestion": "Would you like to visit the home page instead?",
+        "goHome": "Go to home page"
       },
       "header": {
         "home": "Home",
@@ -84,7 +86,9 @@
       },
       "notfound": {
         "title": "Página no encontrada",
-        "message": "La página que ha solicitado no existe... lo siento."
+        "message": "La página que has solicitado no existe... lo siento.",
+        "suggestion": "Haz clic a continuación para ir a la página principal.",
+        "goHome": "Ir a inicio"
       },
       "header": {
         "home": "Inicio",
