@@ -15,10 +15,7 @@ exports.onCreatePage = async ({
 
   // Delete the original page (since we are gonna create localized versions of it) and add a
   // redirect header
-
-  if (page.path.indexOf("404") < 0) {
-    await deletePage(page)
-  }
+  await deletePage(page)
 
   await Promise.all(
     config.siteMetadata.supportedLanguages.map(async lang => {
@@ -49,16 +46,13 @@ exports.onCreatePage = async ({
 
   // Create a fallback redirect if the language is not supported or the
   // Accept-Language header is missing for some reason
-  if (page.path.indexOf("404") < 0) {
-    createRedirect({
-      fromPath: originalPath,
-      toPath: `/${config.siteMetadata.defaultLanguage}${page.path}`,
-      isPermanent: false,
-      redirectInBrowser: isEnvDevelopment,
-      statusCode: 301,
-    })
-  }
-
+  createRedirect({
+    fromPath: originalPath,
+    toPath: `/${config.siteMetadata.defaultLanguage}${page.path}`,
+    isPermanent: false,
+    redirectInBrowser: isEnvDevelopment,
+    statusCode: 301,
+  })
 }
 
 exports.onCreateWebpackConfig = ({ getConfig, actions }) => {
