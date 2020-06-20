@@ -1,16 +1,14 @@
 import React from "react"
 import { graphql } from "gatsby"
-import Link  from "../components/link"
+import Link from "../components/link"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Img from "gatsby-image"
 import { useTranslation } from "react-i18next"
-import styled from "styled-components"
-import theme from "../theme"
 import { usePageContext } from "../PageContext"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import { BLOCKS } from "@contentful/rich-text-types"
-
+import styles from "./index.module.scss"
 const options = {
   renderNode: {
     [BLOCKS.HEADING_3]: (_, children) => (
@@ -42,10 +40,12 @@ const IndexPage = ({ data }) => {
           <div className="columns is-centered">
             <div className="column">
               <div className="column is-offset-1-widescreen is-offset-1-desktop is-offset-one-and-half-tablet">
-                <Title theme={theme}>Cristian Pérez</Title>
+                <h1 class={styles.title}>
+                  Cristian Pérez
+                </h1>
                 <div className="column">
                   <div className="content">
-                    <div className="column is-full-widescreen is-full-desktop is-full-size-tablet is-marginless is-paddingless">
+                    <div className={`${styles.myDescription} column is-full-widescreen is-full-desktop is-full-size-tablet is-marginless is-paddingless`}>
                       {documentToReactComponents(json, options)}
                       <br />
                       <Link
@@ -60,16 +60,16 @@ const IndexPage = ({ data }) => {
               </div>
             </div>
             <div className="column is-background is-hidden-mobile">
-              <StyledImg
-                theme={theme}
-                className="has-radius-275"
+              <Img
+                
+                className={`${styles.image} has-radius-275`}
                 fluid={data.image.childImageSharp.fluid}
               />
             </div>
           </div>
-          <StyledImg
-            theme={theme}
-            className="has-radius-275 is-hidden-tablet"
+          <Img
+            
+            className={`${styles.image} has-radius-275 is-hidden-tablet`}
             fluid={data.image.childImageSharp.fluid}
           />
         </div>
@@ -79,101 +79,6 @@ const IndexPage = ({ data }) => {
 }
 
 export default IndexPage
-
-const StyledImg = styled(Img)`
-${({ theme }) => {
-  return theme.mixins.microScreen(`
-    position: absolute !important;
-    overflow: hidden;
-    width: 200px;
-    height: 200px;
-    top: 50%;
-    left: -130px;
-    z-index: -1;
-  `)
-}}
-${({ theme }) => {
-  return theme.mixins.smallScreen(`
-    position: absolute !important;
-    overflow: hidden;
-    width: 250px;
-    height: 250px;
-    top: 50%;
-    left: -160px;
-    z-index: -1;
-  `)
-}}
-
-  ${({ theme }) => {
-    return theme.mixins.mediumScreen(`
-      width: 275px;
-      height: 275px;
-      transform: translateX(-15px);
-    `)
-  }}
-  ${({ theme }) => {
-    return theme.mixins.mediumLargeScreen(`
-    width: 400px;
-    height: 400px;
-    transform: translateX(-60px);
-    `)
-  }}
-  ${({ theme }) => {
-    return theme.mixins.largeScreen(`
-      width: 400px;
-      height: 400px;
-      transform: translateX(-40px);
-    `)
-  }}
-  ${({ theme }) => {
-    return theme.mixins.extraLargeScreen(`
-      width: 550px;
-      height: 550px;
-      transform: translateX(-70px);
-    `)
-  }}  
-`
-
-const Title = styled.h1`
-  font: 9rem Monoton;
-  line-height: 10rem;
-  ${({ theme }) => {
-    return theme.mixins.microScreen(`
-    font-size: 3rem;
-    line-height: 3.5rem;
-    `)
-  }}
-  ${({ theme }) => {
-    return theme.mixins.smallScreen(`
-    font-size: 3.5rem;
-    line-height: 4.5rem;
-    
-    `)
-  }}
-  ${({ theme }) => {
-    return theme.mixins.mediumScreen(`
-      font-size: 6.5rem;
-      line-height: 7rem;
-    `)
-  }}
-  ${({ theme }) => {
-    return theme.mixins.mediumLargeScreen(`
-    font-size:8rem;
-    line-height: 9rem;
-    `)
-  }}
-  ${({ theme }) => {
-    return theme.mixins.largeScreen(`
-      font-size:8rem;
-      line-height: 9rem;
-    `)
-  }}
-  ${({ theme }) => {
-    return theme.mixins.extraLargeScreen(`
-      font-size:9rem;
-    `)
-  }}
-`
 
 export const query = graphql`
   query {

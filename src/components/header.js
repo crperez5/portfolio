@@ -5,6 +5,7 @@ import Img from "gatsby-image"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faLinkedin, faGithub } from "@fortawesome/free-brands-svg-icons"
 import { useTranslation } from "react-i18next"
+import styles from "./header.module.scss"
 
 export default () => {
   const { t } = useTranslation()
@@ -22,24 +23,10 @@ export default () => {
               }
             }
           }
-          mobileImage: file(relativePath: { eq: "logo.png" }) {
+          logo: file(relativePath: { eq: "logo.png" }) {
             childImageSharp {
-              fixed(width: 48, height: 48) {
-                ...GatsbyImageSharpFixed
-              }
-            }
-          }
-          tabletImage: file(relativePath: { eq: "logo.png" }) {
-            childImageSharp {
-              fixed(width: 92, height: 92) {
-                ...GatsbyImageSharpFixed
-              }
-            }
-          }
-          desktopImage: file(relativePath: { eq: "logo.png" }) {
-            childImageSharp {
-              fixed(width: 128, height: 128) {
-                ...GatsbyImageSharpFixed
+              fluid {
+                ...GatsbyImageSharpFluid
               }
             }
           }
@@ -48,21 +35,6 @@ export default () => {
       render={data => {
         const [burgerActive, setBurgerActive] = useState(false)
         const toggleBurgerActive = () => setBurgerActive(!burgerActive)
-
-        const sources = [
-          {
-            ...data.mobileImage.childImageSharp.fixed,
-            media: `(max-width: 768px)`,
-          },
-          {
-            ...data.tabletImage.childImageSharp.fixed,
-            media: `(min-width: 769px) and (width: 1024px)`,
-          },
-          {
-            ...data.desktopImage.childImageSharp.fixed,
-            media: `(min-width: 1025px)`,
-          },
-        ]
 
         return (
           <header className="section primary-background">
@@ -77,10 +49,15 @@ export default () => {
                     className="navbar-item has-no-background"
                     href={data.site.siteMetadata.siteUrl}
                   >
-                    <Img className="has-radius-275" fixed={sources} />
+                    <div class={styles.logoContainer}>
+                      <Img
+                        className="has-radius-275"
+                        fluid={data.logo.childImageSharp.fluid}
+                      />
+                    </div>
                   </a>
                   <a
-                    className="navbar-item has-no-background is-hidden-desktop"
+                    className={`${styles.grow} navbar-item has-no-background is-hidden-desktop`}
                     href={data.site.siteMetadata.siteUrl}
                   >
                     <strong className="title is-5 ">
