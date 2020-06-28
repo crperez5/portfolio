@@ -131,7 +131,8 @@
         "monthWithCount_plural": "{{count}} meses"
       },
       "conferences": {
-        "loadMore": "Cargar Más"
+        "loadMore": "Cargar Más",
+        "title": "Conferencias, charlas y eventos"
       },
       "contact": {
         "title": "Contacto",
