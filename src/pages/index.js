@@ -12,7 +12,7 @@ import styles from "./index.module.scss"
 const options = {
   renderNode: {
     [BLOCKS.HEADING_3]: (_, children) => (
-      <h3 className="has-text-weight-light is-size-4-fullhd is-size-4-widescreen is-size-4-desktop is-size-5-tablet is-size-5-mobile">
+      <h3 className={`${styles.h3} has-text-weight-light is-size-4-fullhd is-size-4-widescreen is-size-4-desktop is-size-5-tablet is-size-5-mobile`}>
         {children}
       </h3>
     ),

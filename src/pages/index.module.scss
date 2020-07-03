@@ -49,9 +49,16 @@
   }
 }
 
-.my-description  {
-  h1, h2, h3, h4 {
+.my-description {
+  h1,
+  h2,
+  h3,
+  h4 {
     text-shadow: 1px 1px #ffffffba;
+  }
+
+  .h3 {
+    width: 97%;
   }
 }
 .image {
