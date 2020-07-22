@@ -29,7 +29,8 @@
       },
       "about": {
         "title": "About me",
-        "opener": "Hi, I'm Cristian."
+        "opener": "Hi, I'm Cristian.",
+        "readMore": "Read More"
       },
       "tech-stack": {
         "title": "Technology Stack"
@@ -110,7 +111,8 @@
       },
       "about": {
         "title": "Sobre mí",
-        "opener": "Hola, Soy Cristian."
+        "opener": "Hola, Soy Cristian.",
+        "readMore": "Leer Más"
       },
       "tech-stack": {
         "title": "Tecnologías"

@@ -40,7 +40,7 @@ const IndexPage = ({ data }) => {
           <div className="columns is-centered">
             <div className="column">
               <div className="column is-offset-1-widescreen is-offset-1-desktop is-offset-one-and-half-tablet">
-                <h1 class={styles.title}>
+                <h1 className={styles.title}>
                   Cristian Pérez
                 </h1>
                 <div className="column">

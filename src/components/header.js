@@ -49,7 +49,7 @@ export default () => {
                     className="navbar-item has-no-background"
                     href={data.site.siteMetadata.siteUrl}
                   >
-                    <div class={styles.logoContainer}>
+                    <div className={styles.logoContainer}>
                       <Img
                         className="has-radius-275"
                         fluid={data.logo.childImageSharp.fluid}

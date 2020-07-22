@@ -3,10 +3,11 @@ import { StaticQuery, graphql } from "gatsby"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { Trans } from "react-i18next"
 import { usePageContext } from "../PageContext"
+import ReadMoreReact from "read-more-react"
+import i18n from "i18next"
 
 const Features = () => {
   const { lang } = usePageContext()
-
   return (
     <StaticQuery
       query={graphql`
@@ -39,6 +40,7 @@ const Features = () => {
       `}
       render={data => {
         const features = data[lang].nodes
+        const t = i18n.getFixedT(lang)
 
         return (
           <>
@@ -74,7 +76,13 @@ const Features = () => {
                             <div className="columns">
                               <div className="column">
                                 <h3>{f.title}</h3>
-                                {f.description.description}
+                                <ReadMoreReact
+                                  text={f.description.description ?? ""}
+                                  min={120}
+                                  ideal={180}
+                                  max={220}
+                                  readMoreText={t("about.readMore")}
+                                />
                               </div>
                             </div>
                           </div>
