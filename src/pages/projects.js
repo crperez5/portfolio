@@ -93,7 +93,7 @@ const ProjectsPage = ({ data }) => {
                                             .getFullYear()
                                             .toString()
                                             .slice(-2)
-                                        : new Date(p.startDate)
+                                        : new Date()
                                             .getFullYear()
                                             .toString()
                                             .slice(-2)
