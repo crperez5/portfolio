@@ -39,7 +39,7 @@ export default function Video(props) {
             setShowPlayIcon(true)
           }}
           ref={imageContainerRef}
-          src={`https://img.youtube.com/vi/${id}/sddefault.jpg`}
+          src={`https://img.youtube.com/vi/${id}/hqdefault.jpg`}
         />
       </Figure>
     </div>
