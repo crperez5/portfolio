@@ -1,6 +1,4 @@
 import React, { useState, useRef } from "react"
-import styled from "styled-components"
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPlayCircle } from "@fortawesome/free-solid-svg-icons"
 
@@ -12,7 +10,7 @@ const extractId = url => {
 
 export default function Video(props) {
   const [showVideo, setshowVideo] = useState(false)
-  const [showPlayIcon, setShowPlayIcon] = useState(false)
+  const [showPlayIcon, setShowPlayIcon] = useState(true)
   const imageContainerRef = useRef()
 
   const url = props.url
@@ -21,27 +19,31 @@ export default function Video(props) {
 
   return !showVideo ? (
     <div>
-      <Figure
+      <figure style={{cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center"}}
         onClick={() => {
           setshowVideo(true)
         }}
         className="image"
       >
         {showPlayIcon && (
-          <PlayIcon
-            icon={faPlayCircle}
-            size="5x"
-            className="has-text-secondary has-background-light"
-          />
+          <div style={{position: "absolute"}}>
+			  <FontAwesomeIcon
+				style={{borderRadius: "60px", boxShadow: "inset 0px 0px 0px 10px"}}
+				icon={faPlayCircle}
+				size="5x"
+				className="has-text-secondary has-background-light"
+			  />
+		  </div>
         )}
-        <ImageContainer
+        <img
+		  style={{width: "100%"}}
           onLoad={() => {
             setShowPlayIcon(true)
           }}
           ref={imageContainerRef}
           src={`https://img.youtube.com/vi/${id}/hqdefault.jpg`}
         />
-      </Figure>
+      </figure>
     </div>
   ) : (
     <iframe
@@ -53,18 +55,3 @@ export default function Video(props) {
     ></iframe>
   )
 }
-
-const ImageContainer = styled.img`
-  width: 100%;
-`
-const PlayIcon = styled(FontAwesomeIcon)`
-  position: absolute;
-  border-radius: 60px;
-  box-shadow: inset 0px 0px 0px 10px;
-`
-const Figure = styled.figure`
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`
