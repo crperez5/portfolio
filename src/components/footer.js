@@ -34,7 +34,7 @@ export default () => {
             </div>
             <div className="level-item is-hidden-mobile">|</div>
             <div className="level-item">
-              <a href={`${data.site.siteMetadata.siteUrl}/en`}>{t("footer.spanish")}</a>
+              <a href={`${data.site.siteMetadata.siteUrl}/es`}>{t("footer.spanish")}</a>
             </div>
           </div>
         </div>
