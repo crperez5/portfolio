@@ -7,6 +7,7 @@ export default () => {
     query {
       site {
         siteMetadata {
+		  siteUrl
           authorName
         }
       }
@@ -29,11 +30,11 @@ export default () => {
           </div>
           <div className="level-right">
             <div className="level-item">
-              <a href={`${process.env.URL}/en`}>{t("footer.english")}</a>
+              <a href={`${data.site.siteMetadata.siteUrl}/en`}>{t("footer.english")}</a>
             </div>
             <div className="level-item is-hidden-mobile">|</div>
             <div className="level-item">
-              <a href={`${process.env.URL}/es`}>{t("footer.spanish")}</a>
+              <a href={`${data.site.siteMetadata.siteUrl}/en`}>{t("footer.spanish")}</a>
             </div>
           </div>
         </div>
