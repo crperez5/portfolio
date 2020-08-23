@@ -29,11 +29,11 @@ export default () => {
           </div>
           <div className="level-right">
             <div className="level-item">
-              <a href="http://localhost:8000/en">{t("footer.english")}</a>
+              <a href={`${process.env.URL}/en`}>{t("footer.english")}</a>
             </div>
             <div className="level-item is-hidden-mobile">|</div>
             <div className="level-item">
-              <a href="http://localhost:8000/es">{t("footer.spanish")}</a>
+              <a href={`${process.env.URL}/es`}>{t("footer.spanish")}</a>
             </div>
           </div>
         </div>
